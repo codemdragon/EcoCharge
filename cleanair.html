@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Air Solutions — EcoCharge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #0ea5a9;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #cbd5e1;
+            --white: #ffffff;
+            --radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        /* Stats Grid for "Why Choose" Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .stat-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-top: 4px solid var(--primary);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card-description {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Tech Grid for "Filtration Technologies" Section */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .tech-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-card-header {
+            padding: 25px;
+            background: var(--gradient);
+            color: var(--white);
+        }
+
+        .tech-card-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .tech-card-body {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .tech-card-description {
+            font-size: 15px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .tech-card-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .tech-card-details li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .tech-card-details li:last-child {
+            border-bottom: none;
+        }
+        
+        .tech-card-details strong {
+            color: var(--dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--light);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-info {
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-description {
+            color: var(--gray-light);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .footer-links {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">EC</div>
+                    EcoCharge
+                </a>
+                <div class="nav-links">
+                    <a href="index.html#chargers">EV Chargers</a>
+                    <a href="index.html#map">Charging Map</a>
+                    <a href="cleanair.html" class="active">Clean Air</a>
+                    <a href="index.html#research">Research</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="index.html#podcasts">Podcasts</a>
+                </div>
+                <a href="#contact" class="cta-button">Get Consultation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Why Choose Clean Air Section -->
+        <section id="why-choose">
+            <div class="container">
+                <h2 class="section-title">Why Choose Clean Air Solutions</h2>
+                <p class="section-subtitle">Immediate environmental impact while preparing for Pakistan's electric future.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-value">Up to 95%</div>
+                        <h3 class="stat-card-title">Emission Reduction</h3>
+                        <p class="stat-card-description">Significant reduction in harmful emissions.</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-value">70%</div>
+                        <h3 class="stat-card-title">Health Impact</h3>
+                        <p class="stat-card-description">Improvement in overall air quality.</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-value">EURO-VI</div>
+                        <h3 class="stat-card-title">Compliance Ready</h3>
+                        <p class="stat-card-description">Meet international emission standards.</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-value">2–3 Years</div>
+                        <h3 class="stat-card-title">Return on Investment</h3>
+                        <p class="stat-card-description">Quick return on your investment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtration Technologies Section -->
+        <section id="technologies" style="background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);">
+            <div class="container">
+                <h2 class="section-title">Advanced Filtration Technologies</h2>
+                <p class="section-subtitle">Cutting-edge solutions to reduce emissions from conventional vehicles.</p>
+                
+                <div class="tech-grid">
+                    <!-- Diesel Particulate Filters (DPF) Card -->
+                    <div class="tech-card">
+                        <div class="tech-card-header">
+                           <h3 class="tech-card-title">Diesel Particulate Filters (DPF)</h3>
+                        </div>
+                        <div class="tech-card-body">
+                           <p class="tech-card-description">Advanced filtration systems that remove 95% of particulate matter from diesel engines.</p>
+                           <ul class="tech-card-details">
+                               <li><strong>Efficiency:</strong><span>95%</span></li>
+                               <li><strong>Cost:</strong><span>Rs: 50,000 - 80,000</span></li>
+                               <li><strong>Installation:</strong><span>2-3 Hours</span></li>
+                               <li><strong>Applications:</strong><span>Trucks, Buses, Generators</span></li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <!-- Selective Catalytic Reduction (SCR) Card -->
+                    <div class="tech-card">
+                        <div class="tech-card-header">
+                           <h3 class="tech-card-title">Selective Catalytic Reduction (SCR)</h3>
+                        </div>
+                        <div class="tech-card-body">
+                           <p class="tech-card-description">Reduces NOx emissions up to 90% using urea injection technology.</p>
+                           <ul class="tech-card-details">
+                               <li><strong>Efficiency:</strong><span>90%</span></li>
+                               <li><strong>Cost:</strong><span>Rs: 75,000 - 120,000</span></li>
+                               <li><strong>Installation:</strong><span>4-6 Hours</span></li>
+                               <li><strong>Applications:</strong><span>Heavy Vehicles, Industrial Equipment</span></li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <!-- Catalytic Converters Card -->
+                    <div class="tech-card">
+                        <div class="tech-card-header">
+                           <h3 class="tech-card-title">Catalytic Converters</h3>
+                        </div>
+                        <div class="tech-card-body">
+                           <p class="tech-card-description">High efficiency converters for petrol engines reducing CO and HC emissions.</p>
+                           <ul class="tech-card-details">
+                               <li><strong>Efficiency:</strong><span>85%</span></li>
+                               <li><strong>Cost:</strong><span>Rs: 15,000 - 35,000</span></li>
+                               <li><strong>Installation:</strong><span>1-2 Hours</span></li>
+                               <li><strong>Applications:</strong><span>Cars, Motorcycles, CNG vehicles</span></li>
+                           </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <div class="logo-icon">EC</div>
+                        EcoCharge
+                    </div>
+                    <p class="footer-description">Leading Pakistan's transition to sustainable transportation with EV charging infrastructure, clean air solutions, and comprehensive research.</p>
+                    <a href="#contact" class="cta-button">Contact Us</a>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html#chargers">EV Chargers</a></li>
+                            <li><a href="index.html#map">Charging Map</a></li>
+                            <li><a href="cleanair.html">Clean Air Solutions</a></li>
+                            <li><a href="index.html#research">Research</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="index.html#podcasts">Podcasts</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#">EV Guide</a></li>
+                            <li><a href="#">Carbon Calculator</a></li>
+                            <li><a href="#">Research Papers</a></li>
+                            <li><a href="#">Case Studies</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact</h3>
+                        <ul>
+                            <li><a href="mailto:info@ecocharge.pk">info@ecocharge.pk</a></li>
+                            <li><a href="tel:+92123456789">+92 123 456789</a></li>
+                            <li>Karachi, Pakistan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 EcoCharge. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
