@@ -448,7 +448,7 @@
                             <li><a href="index.html#chargers">EV Chargers</a></li>
                             <li><a href="index.html#map">Charging Map</a></li>
                             <li><a href="index.html#clean-air">Clean Air Solutions</a></li>
-                            <li><a href="index.html#research">Research</a></li>
+                            <li><a href="research.html">Research</a></li>
                             <li><a href="blog.html">Blog</a></li>
                             <li><a href="index.html#podcasts">Podcasts</a></li>
                         </ul>
@@ -483,61 +483,29 @@
     </footer>
 
     <script>
-        // --- Sample Blog Data (stored in JSON format) ---
-        const blogPosts = [
-            {
-                id: 1,
-                title: "The 2030 EV Policy: What It Means for Pakistan",
-                author: "Ayesha Khan",
-                date: "October 26, 2023",
-                image: "https://images.unsplash.com/photo-1617886322207-6f504e7472c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-                excerpt: "Pakistan's National EV Policy aims for 30% of new vehicle sales to be electric by 2030. This ambitious goal is set to revolutionize our transport sector, reduce emissions, and create new economic opportunities...",
-                fullContent: `
-                    <p>Pakistan's National Electric Vehicle (EV) Policy, targeting 30% of new vehicle sales to be electric by 2030, is a landmark initiative. This policy is not just about cars; it's a comprehensive strategy to reshape urban mobility, combat climate change, and bolster the national economy.</p>
-                    <h3>Key Pillars of the Policy</h3>
-                    <p>The policy focuses on several key areas: incentivizing local manufacturing of EVs and their components, developing a nationwide charging infrastructure, and offering consumer-side incentives like lower registration fees and import duties. The government has allocated Rs9 billion in subsidies to support the installation of 3,000 new charging stations, a crucial step in alleviating 'range anxiety' among potential EV owners.</p>
-                    <h3>Economic and Environmental Impact</h3>
-                    <p>The shift to EVs is projected to save Pakistan up to $1 billion annually in oil imports. Environmentally, the reduction in tailpipe emissions will significantly improve air quality in major cities like Lahore and Karachi, which frequently rank among the world's most polluted. The policy is expected to contribute to a 4.5 million-ton reduction in CO₂ emissions per year, aligning with Pakistan's international climate commitments.</p>
-                `
-            },
-            {
-                id: 2,
-                title: "AC vs. DC Fast Charging: Choosing the Right Charger",
-                author: "Bilal Ahmed",
-                date: "October 15, 2023",
-                image: "https://images.unsplash.com/photo-1622964985532-6a53743d3446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-                excerpt: "As the EV ecosystem grows, understanding the difference between AC and DC charging is crucial for every driver. While AC chargers are perfect for overnight home use, DC fast chargers are the game-changers for long-distance travel...",
-                fullContent: `
-                    <p>Navigating the world of EV charging can seem complex, but it primarily boils down to two types: Alternating Current (AC) and Direct Current (DC). Understanding their differences is key to optimizing your EV experience.</p>
-                    <h3>AC Charging: The Everyday Solution</h3>
-                    <p>AC charging is the most common type, found in homes, workplaces, and public parking lots. These chargers provide power from the grid (which is AC) to the car's onboard charger, which then converts it to DC to charge the battery. They range from 7kW to 22kW, making them ideal for situations where the car will be parked for several hours, such as overnight or during a workday. They are cost-effective to install and sufficient for daily commuting needs.</p>
-                    <h3>DC Fast Charging: Power for the Road</h3>
-                    <p>DC fast chargers, as the name suggests, provide DC power directly to the battery, bypassing the car's onboard converter. This allows for much higher power delivery, from 60kW up to 240kW or more. A DC fast charger can replenish an EV's battery to 80% in as little as 20-45 minutes. These are strategically placed along highways and major travel routes, like the 40 stations approved for the Peshawar–Karachi motorway, making intercity EV travel a reality in Pakistan.</p>
-                `
-            },
-            {
-                id: 3,
-                title: "Mapping Pakistan's EV Motorway Network",
-                author: "Fatima Ali",
-                date: "September 28, 2023",
-                image: "https://images.unsplash.com/photo-1593292415113-c32c2a4c5a93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
-                excerpt: "The plan to install 40 charging stations along the Peshawar-Karachi motorway is the backbone of Pakistan's EV revolution. This network ensures that drivers can travel the length of the country with confidence...",
-                fullContent: `
-                    <p>One of the biggest hurdles to EV adoption is 'range anxiety'—the fear of running out of power before reaching a destination. To combat this, Pakistan is building a robust charging network along its primary transport artery, the Peshawar-Karachi motorway network.</p>
-                    <h3>A Station Every 100km</h3>
-                    <p>The government and private sector partners have approved the installation of 40 charging stations. These stations will be strategically spaced approximately every 105 kilometers, well within the range of modern EVs. Each station will feature a mix of AC chargers and at least one DC fast charger to cater to different needs.</p>
-                    <h3>More Than Just Charging</h3>
-                    <p>These service areas will become hubs for EV travelers, offering amenities like cafes, rest areas, and technical support. This development not only facilitates long-distance travel but also promotes tourism and local economies along the motorway. It sends a clear signal that Pakistan is serious about creating a viable, long-term ecosystem for electric vehicles.</p>
-                `
-            }
-        ];
-
         document.addEventListener('DOMContentLoaded', () => {
             const blogGrid = document.getElementById('blog-grid-container');
             const modal = document.getElementById('blog-modal');
             const modalTitle = document.getElementById('modal-title');
             const modalContent = document.getElementById('modal-content');
             const closeModalBtn = document.getElementById('modal-close');
+            
+            let blogPosts = []; // Will hold our fetched data
+
+            // --- New Function to Fetch Data ---
+            async function loadBlogPosts() {
+                try {
+                    const response = await fetch('blog-posts.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    blogPosts = await response.json();
+                    displayBlogPosts();
+                } catch (error) {
+                    console.error("Could not load blog posts:", error);
+                    blogGrid.innerHTML = '<p>Sorry, we were unable to load the blog posts at this time.</p>';
+                }
+            }
 
             // 1. Populate blog grid
             function displayBlogPosts() {
@@ -563,7 +531,7 @@
                 modalTitle.textContent = post.title;
                 modalContent.innerHTML = post.fullContent;
                 modal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                document.body.style.overflow = 'hidden';
             }
 
             function closeModal() {
@@ -586,12 +554,12 @@
             closeModalBtn.addEventListener('click', closeModal);
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
-                    closeModal(); // Close if clicking on the overlay
+                    closeModal();
                 }
             });
             
             // Initial load
-            displayBlogPosts();
+            loadBlogPosts(); // Call the new fetch function
         });
     </script>
 
