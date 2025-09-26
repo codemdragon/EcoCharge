@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EcoCharge — Pakistan's Electric Future</title>
+  <meta name="description" content="Premium EV charging solutions, clean air technology, research insights, and sustainability tools for Pakistan." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8fdfc;
+      --card: #ffffff;
+      --muted: #64748b;
+      --accent1: #10b981;
+      --accent2: #0ea5a9;
+      --accent3: #059669;
+      --glass: rgba(255,255,255,0.7);
+      --radius: 16px;
+      --shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 4px 10px -6px rgba(0,0,0,0.05);
+      --gradient: linear-gradient(135deg, var(--accent1), var(--accent2));
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      margin: 0;
+      color: #0f172a;
+      background: linear-gradient(180deg, #f0fdfa 0%, var(--bg) 100%);
+      line-height: 1.6;
+    }
+    
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: var(--glass);
+      border-bottom: 1px solid rgba(15,23,42,0.04);
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      justify-content: space-between;
+      padding: 16px 0;
+    }
+    
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 20px;
+      box-shadow: var(--shadow);
+    }
+    
+    .brand-text {
+      font-weight: 700;
+      font-size: 22px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+    
+    .nav-links a:hover {
+      color: var(--accent1);
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: var(--gradient);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    a.button {
+      background: var(--gradient);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    a.button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -5px rgba(16, 185, 129, 0.3);
+    }
+    
+    main.hero {
+      padding: 80px 0 40px;
+    }
+    
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      align-items: start;
+    }
+    
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(16, 185, 129, 0.1);
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--accent1);
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    
+    h1 {
+      font-size: 48px;
+      margin: 14px 0;
+      line-height: 1.1;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0f172a, #334155);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    p.lead {
+      color: var(--muted);
+      max-width: 680px;
+      font-size: 18px;
+      margin: 20px 0;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+    }
+    
+    /* Stats strip */
+    .stats {
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      margin: 60px 0;
+      padding: 30px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(15,23,42,0.03);
+    }
+    
+    .stat {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    
+    .stat:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 10%;
+      height: 80%;
+      width: 1px;
+      background: rgba(15,23,42,0.05);
+    }
+    
+    .stat h3 {
+      margin: 6px 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent1);
+    }
+    
+    .stat p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+    
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 30px;
+    }
+    
+    .card {
+      background: var(--card);
+      padding: 28px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(15,23,42,0.03);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient);
+    }
+    
+    .card h4 {
+      margin: 8px 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    
+    .card small {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+    /* Map */
+    #map {
+      height: 400px;
+      border-radius: var(--radius);
+      margin-top: 24px;
+      border: 1px solid rgba(15,23,42,0.04);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    
+    /* Clean air section */
+    .clean {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin: 80px 0;
+      padding: 40px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    
+    .clean img {
+      width: 100%;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    
+    .feature {
+      background: #f0fdf9;
+      padding: 16px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .feature:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.2);
+    }
+    
+    /* Research & blog */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 60px 0;
+    }
+    
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .post {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid rgba(15,23,42,0.03);
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+    
+    .post:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px -5px rgba(0,0,0,0.1);
+    }
+    
+    /* Carbon calculator */
+    .calc {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      background: var(--card);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(15,23,42,0.03);
+    }
+    
+    form .row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    label {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 4px;
+      display: block;
+    }
+    
+    input, select {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(15,23,42,0.08);
+      width: 100%;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent1);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+    
+    .result {
+      background: linear-gradient(135deg, #f0fdf9, #ecfdf5);
+      padding: 20px;
+      border-radius: var(--radius);
+      min-width: 240px;
+      box-shadow: var(--shadow);
+    }
+    
+    footer {
+      margin-top: 80px;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #cfeefd;
+      padding: 40px 0;
+    }
+    
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      .clean { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .calc { flex-direction: column; }
+    }
+    
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; }
+      h1 { font-size: 36px; }
+      .cards { grid-template-columns: 1fr; }
+      .stats { flex-direction: column; gap: 30px; }
+      .stat:not(:last-child)::after { display: none; }
+      .nav-links { display: none; }
+      .hero-cta { flex-direction: column; }
+      .features { grid-template-columns: 1fr; }
+      footer .container { flex-direction: column; gap: 20px; text-align: center; }
+      
+      /* Mobile menu */
+      .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--muted);
+        cursor: pointer;
+      }
+      
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--card);
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+      }
+      
+      .mobile-menu.active {
+        transform: translateY(0);
+      }
+      
+      .mobile-menu a {
+        font-size: 20px;
+        text-decoration: none;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--muted);
+        cursor: pointer;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      .mobile-menu-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <div class="logo">EC</div>
+          <div class="brand-text">EcoCharge</div>
+        </div>
+        <div class="nav-links">
+          <a href="#chargers">EV Chargers</a>
+          <a href="#map">Charging Map</a>
+          <a href="#clean">Clean Air</a>
+          <a href="#research">Research</a>
+          <a href="#blog">Blog</a>
+          <a class="button" href="#contact">Get Consultation</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+      </nav>
+    </div>
+    <div class="mobile-menu">
+      <button class="close-menu">✕</button>
+      <a href="#chargers">EV Chargers</a>
+      <a href="#map">Charging Map</a>
+      <a href="#clean">Clean Air</a>
+      <a href="#research">Research</a>
+      <a href="#blog">Blog</a>
+      <a class="button" href="#contact">Get Consultation</a>
+    </div>
+  </header>
+
+  <main class="container hero">
+    <div class="hero-grid">
+      <div class="fade-in">
+        <div class="eyebrow">⚡ 20+ Charging Stations Nationwide</div>
+        <h1>Pakistan's Premium Electric Future Starts Here</h1>
+        <p class="lead">Leading Pakistan's transition to sustainable transportation with premium EV charging infrastructure, innovative clean air solutions, and comprehensive research. Join the revolution towards a cleaner, greener Pakistan.</p>
+
+        <div class="hero-cta">
+          <a class="button" href="#chargers">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
+            </svg>
+            Find EV Chargers
+          </a>
+          <a style="padding:12px 20px;border-radius:12px;background:transparent;border:1px solid rgba(15,23,42,0.08);text-decoration:none;color:var(--muted);font-weight:500;transition:all 0.3s ease" href="#research" onmouseover="this.style.borderColor='var(--accent1)';this.style.color='var(--accent1)'" onmouseout="this.style.borderColor='rgba(15,23,42,0.08)';this.style.color='var(--muted)'">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="currentColor"/>
+            </svg>
+            Download Research
+          </a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <h3>4.5M</h3>
+            <p>Tons CO₂ Reduction/Year</p>
+          </div>
+          <div class="stat">
+            <h3>$1B</h3>
+            <p>Annual Savings Target</p>
+          </div>
+          <div class="stat">
+            <h3>15,000</h3>
+            <p>EVs Currently on Road</p>
+          </div>
+          <div class="stat">
+            <h3>30%</h3>
+            <p>EV Target by 2030</p>
+          </div>
+        </div>
+
+        <section id="chargers">
+          <h2>Premium EV Charging Infrastructure</h2>
+          <p style="color:var(--muted)">Pakistan's most comprehensive network of premium EV charging stations with 3,000 new stations planned and Rs9 billion in government subsidies.</p>
+
+          <div class="cards">
+            <div class="card">
+              <h4>AC Chargers</h4>
+              <small>7kW–22kW for routine use at malls, offices, and residences.</small>
+              <p style="margin-top:16px"><strong>Power:</strong> 7kW - 22kW<br><strong>Charge Time:</strong> 4-8 hours</p>
+              <div style="margin-top:16px"><a href="#map" style="color:var(--accent1);font-weight:600;text-decoration:none">Find AC Chargers →</a></div>
+            </div>
+
+            <div class="card">
+              <h4>DC Fast Chargers</h4>
+              <small>60kW–240kW high-power charging for intercity travel.</small>
+              <p style="margin-top:16px"><strong>Power:</strong> 60kW - 240kW<br><strong>Charge Time:</strong> 20-45 minutes</p>
+              <div style="margin-top:16px"><a href="#map" style="color:var(--accent1);font-weight:600;text-decoration:none">Find Fast Chargers →</a></div>
+            </div>
+
+            <div class="card">
+              <h4>Motorway Network</h4>
+              <small>40 approved charging stations on Peshawar–Karachi route.</small>
+              <p style="margin-top:16px"><strong>Stations:</strong> 40 Approved<br><strong>Spacing:</strong> ~105km</p>
+              <div style="margin-top:16px"><a href="#map" style="color:var(--accent1);font-weight:600;text-decoration:none">View Route Map →</a></div>
+            </div>
+          </div>
+
+          <div id="map" aria-label="Interactive charging station map">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);background:linear-gradient(135deg, #f0fdfa, #e0f2fe);border-radius:var(--radius);padding:20px;text-align:center">
+              <div>
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:15px;opacity:0.7">
+                  <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="#10b981"/>
+                </svg>
+                <h3 style="margin-bottom:10px;color:#0f172a">Interactive Charging Map</h3>
+                <p>Add your Google Maps API key to enable the interactive map with real-time station status and availability.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="fade-in" style="animation-delay: 0.2s">
+        <div class="card">
+          <h4>Carbon Credits & SDG Impact</h4>
+          <p style="color:var(--muted)">Estimate carbon credit potential and see SDG alignment impact.</p>
+
+          <div style="margin-top:20px" class="calc">
+            <form id="cc-form">
+              <div style="flex:1">
+                <div class="row">
+                  <div style="flex:1">
+                    <label>Vehicle Type</label>
+                    <select id="vehicleType">
+                      <option value="car">Car</option>
+                      <option value="bus">Bus</option>
+                      <option value="truck">Truck</option>
+                    </select>
+                  </div>
+                  <div style="flex:1">
+                    <label>Annual Distance (km)</label>
+                    <input id="distance" type="number" value="15000" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div style="flex:1">
+                    <label>Current Fuel Type</label>
+                    <select id="fuel">
+                      <option value="petrol">Petrol</option>
+                      <option value="diesel">Diesel</option>
+                    </select>
+                  </div>
+                  <div style="flex:1">
+                    <label>Current Fuel Economy (km/l)</label>
+                    <input id="economy" type="number" value="12" />
+                  </div>
+                </div>
+                <div class="row">
+                  <button type="submit" class="button" style="border-radius:10px;width:100%;justify-content:center">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z" fill="currentColor"/>
+                    </svg>
+                    Calculate Carbon Impact
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="result" id="cc-result">
+              <div style="font-weight:700;font-size:18px;margin-bottom:10px">Estimated CO₂ Saved</div>
+              <div id="co2" style="font-size:24px;font-weight:700;color:var(--accent1);margin-bottom:15px">—</div>
+              <div style="font-size:14px;color:var(--muted)">Estimated carbon credits and potential market value will be shown here.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:24px"></div>
+
+        <div class="card">
+          <h4>Quick Links</h4>
+          <ul style="list-style:none;padding:0;margin-top:15px">
+            <li style="margin-bottom:12px">
+              <a href="#clean" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--muted);transition:color 0.2s ease">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
+                </svg>
+                Clean Air Solutions
+              </a>
+            </li>
+            <li style="margin-bottom:12px">
+              <a href="#research" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--muted);transition:color 0.2s ease">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="currentColor"/>
+                </svg>
+                Research
+              </a>
+            </li>
+            <li>
+              <a href="#blog" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--muted);transition:color 0.2s ease">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="currentColor"/>
+                </svg>
+                Daily Blog
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <section id="clean" class="clean fade-in" style="animation-delay: 0.4s">
+      <div>
+        <h3>Clean Air Exhaust Solutions</h3>
+        <p style="color:var(--muted)">Innovative technologies to reduce emissions from conventional vehicles while Pakistan transitions to electric mobility.</p>
+
+        <ul style="margin-top:20px;color:var(--muted);list-style:none;padding:0">
+          <li style="margin-bottom:10px;display:flex;align-items:center;gap:10px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="#10b981"/>
+            </svg>
+            Particulate Filters — reduce PM2.5 emissions
+          </li>
+          <li style="margin-bottom:10px;display:flex;align-items:center;gap:10px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="#10b981"/>
+            </svg>
+            Catalytic Converters — reduce NOx and CO
+          </li>
+          <li style="display:flex;align-items:center;gap:10px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="#10b981"/>
+            </svg>
+            Air Quality Monitoring — real-time emissions tracking
+          </li>
+        </ul>
+
+        <div class="features">
+          <div class="feature">
+            <strong>Retrofit Solutions</strong>
+            <div style="font-size:14px;color:var(--muted);margin-top:5px">Upgrade existing vehicles with clean-air technology.</div>
+          </div>
+          <div class="feature">
+            <strong>Fleet Management</strong>
+            <div style="font-size:14px;color:var(--muted);margin-top:5px">Driver training, telematics, emissions tracking.</div>
+          </div>
+          <div class="feature">
+            <strong>Policy Compliance</strong>
+            <div style="font-size:14px;color:var(--muted);margin-top:5px">Support for emission regulation compliance and certification.</div>
+          </div>
+        </div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1549921296-3a8a4a1b1a1f?w=1200&q=60&auto=format&fit=crop" alt="workshop" />
+    </section>
+
+    <section id="research" class="fade-in" style="animation-delay: 0.6s">
+      <h3>Research Projects</h3>
+      <div class="grid-2">
+        <div>
+          <div class="card-list" id="research-list">
+            <div class="post">
+              <strong>EV Adoption Trends in Pakistan</strong>
+              <div style="font-size:14px;color:var(--muted);margin:5px 0">March 2025</div>
+              <p style="color:var(--muted)">Analysis of current EV adoption rates and projections for the next decade based on government policies and market trends.</p>
+            </div>
+            <div class="post">
+              <strong>Carbon Credit Opportunities in Transport</strong>
+              <div style="font-size:14px;color:var(--muted);margin:5px 0">February 2025</div>
+              <p style="color:var(--muted)">Exploring how Pakistan's transition to electric vehicles can generate carbon credits and contribute to climate goals.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <h4>EcoCharge Podcast</h4>
+            <p style="color:var(--muted)">Listen to industry experts discuss the future of sustainable transportation in Pakistan.</p>
+            <div style="margin-top:16px">
+              <a href="#" style="color:var(--accent1);font-weight:600;text-decoration:none">View All Episodes →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog" class="fade-in" style="animation-delay: 0.8s">
+      <h3>Daily EcoCharge Blog</h3>
+      <div id="blog-list" class="card-list">
+        <div class="post">
+          <strong>New Charging Station Opens in Lahore</strong>
+          <div style="font-size:14px;color:var(--muted);margin:5px 0">April 15, 2025</div>
+          <p style="color:var(--muted)">Our latest fast-charging station is now operational at Liberty Market, offering 120kW charging capabilities.</p>
+        </div>
+        <div class="post">
+          <strong>Government Announces New EV Incentives</strong>
+          <div style="font-size:14px;color:var(--muted);margin:5px 0">April 10, 2025</div>
+          <p style="color:var(--muted)">Tax reductions and subsidies for EV purchases are part of the new green initiative announced this week.</p>
+        </div>
+        <div class="post">
+          <strong>Interview with Pakistan's EV Pioneer</strong>
+          <div style="font-size:14px;color:var(--muted);margin:5px 0">April 5, 2025</div>
+          <p style="color:var(--muted)">We sat down with the founder of Pakistan's first EV manufacturer to discuss challenges and opportunities.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact" class="fade-in" style="animation-delay: 1s">
+      <div class="container">
+        <div>
+          <div style="font-weight:700;font-size:24px;margin-bottom:10px">EcoCharge</div>
+          <div style="font-size:14px;color:#94a3b8">Leading Pakistan's transition to sustainable transportation.</div>
+        </div>
+        <div>
+          <form id="subscribe" style="display:flex;gap:12px;align-items:center">
+            <input placeholder="Enter your email" type="email" required style="padding:12px;border-radius:10px;border:none;min-width:250px" />
+            <button class="button">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Mobile menu functionality
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const closeMenuBtn = document.querySelector('.close-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+    });
+    
+    closeMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+    });
+    
+    // Close menu when clicking on a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+
+    /* ======= Carbon Credits Calculator ======= */
+    document.getElementById('cc-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      const dist = Number(document.getElementById('distance').value) || 0;
+      const econ = Number(document.getElementById('economy').value) || 1;
+      const fuel = document.getElementById('fuel').value;
+
+      // Typical emission factors (kg CO2 per litre) — approximate
+      const ef = {petrol:2.31, diesel:2.68};
+      const co2_per_l = ef[fuel] || 2.5;
+
+      // Annual fuel consumption (litres)
+      const litres = dist / econ;
+      const annual_co2_kg = litres * co2_per_l; // kg
+      const annual_co2_t = (annual_co2_kg/1000).toFixed(2);
+
+      // If converted to EV, estimate CO2 emissions from grid (simple proxy)
+      // Assume grid emissions 0.6 kg CO2 per kWh and EV efficiency 0.15 kWh/km
+      const grid_emissions = (dist * 0.15 * 0.6)/1000; // tonnes
+      const saved_t = (annual_co2_t - grid_emissions).toFixed(2);
+
+      document.getElementById('co2').innerText = saved_t + ' tCO₂ / year';
+      
+      // Add some visual feedback
+      const resultDiv = document.getElementById('cc-result');
+      resultDiv.style.animation = 'none';
+      setTimeout(() => {
+        resultDiv.style.animation = 'fadeIn 0.5s ease';
+      }, 10);
+    });
+
+    // Add scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections for scroll animations
+    document.querySelectorAll('section').forEach(section => {
+      section.style.opacity = 0;
+      section.style.transform = 'translateY(20px)';
+      section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(section);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.style.background = 'rgba(255,255,255,0.95)';
+        header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+      } else {
+        header.style.background = 'var(--glass)';
+        header.style.boxShadow = 'none';
+      }
+    });
+
+    // Form submission handling
+    document.getElementById('subscribe').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      alert(`Thank you for subscribing with ${email}! We'll keep you updated on EcoCharge developments.`);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
