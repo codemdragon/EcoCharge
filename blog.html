@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — EcoCharge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #0ea5a9;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #cbd5e1;
+            --white: #ffffff;
+            --radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        /* Blog Grid Styles */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .blog-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+
+        .blog-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-card-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .blog-card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .blog-card-meta {
+            font-size: 12px;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .blog-card-excerpt {
+            font-size: 14px;
+            color: var(--gray);
+            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            transform: scale(0.95);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--dark);
+        }
+
+        .modal-content {
+            padding: 30px;
+            overflow-y: auto;
+            line-height: 1.7;
+        }
+        
+        .modal-content p {
+            margin-bottom: 1.5em;
+        }
+        
+        .modal-content h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--light);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-info {
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-description {
+            color: var(--gray-light);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">EC</div>
+                    EcoCharge
+                </a>
+                <div class="nav-links">
+                    <a href="index.html#chargers">EV Chargers</a>
+                    <a href="index.html#map">Charging Map</a>
+                    <a href="index.html#clean-air">Clean Air</a>
+                    <a href="index.html#research">Research</a>
+                    <a href="blog.html" class="active">Blog</a>
+                    <a href="index.html#podcasts">Podcasts</a>
+                </div>
+                <a href="index.html#contact" class="cta-button">Get Consultation</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Blog Section -->
+    <main>
+        <section id="blog-page">
+            <div class="container">
+                <h2 class="section-title">The EcoCharge Blog</h2>
+                <p style="text-align: center; color: var(--gray); max-width: 800px; margin: -40px auto 50px;">
+                    Insights, news, and research on Pakistan's journey towards a sustainable, electric future.
+                </p>
+
+                <div class="blog-grid" id="blog-grid-container">
+                    <!-- Blog cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Blog Post Modal -->
+    <div class="modal-overlay" id="blog-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Blog Post Title</h2>
+                <button class="modal-close-btn" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-content" id="modal-content">
+                <p>Full blog content will appear here...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <div class="logo-icon">EC</div>
+                        EcoCharge
+                    </div>
+                    <p class="footer-description">Leading Pakistan's transition to sustainable transportation with EV charging infrastructure, clean air solutions, and comprehensive research.</p>
+                    <a href="#contact" class="cta-button">Contact Us</a>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html#chargers">EV Chargers</a></li>
+                            <li><a href="index.html#map">Charging Map</a></li>
+                            <li><a href="index.html#clean-air">Clean Air Solutions</a></li>
+                            <li><a href="index.html#research">Research</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="index.html#podcasts">Podcasts</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#">EV Guide</a></li>
+                            <li><a href="#">Carbon Calculator</a></li>
+                            <li><a href="#">Research Papers</a></li>
+                            <li><a href="#">Case Studies</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact</h3>
+                        <ul>
+                            <li><a href="mailto:info@ecocharge.pk">info@ecocharge.pk</a></li>
+                            <li><a href="tel:+92123456789">+92 123 456789</a></li>
+                            <li>Karachi, Pakistan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 EcoCharge. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Sample Blog Data (stored in JSON format) ---
+        const blogPosts = [
+            {
+                id: 1,
+                title: "The 2030 EV Policy: What It Means for Pakistan",
+                author: "Ayesha Khan",
+                date: "October 26, 2023",
+                image: "https://images.unsplash.com/photo-1617886322207-6f504e7472c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                excerpt: "Pakistan's National EV Policy aims for 30% of new vehicle sales to be electric by 2030. This ambitious goal is set to revolutionize our transport sector, reduce emissions, and create new economic opportunities...",
+                fullContent: `
+                    <p>Pakistan's National Electric Vehicle (EV) Policy, targeting 30% of new vehicle sales to be electric by 2030, is a landmark initiative. This policy is not just about cars; it's a comprehensive strategy to reshape urban mobility, combat climate change, and bolster the national economy.</p>
+                    <h3>Key Pillars of the Policy</h3>
+                    <p>The policy focuses on several key areas: incentivizing local manufacturing of EVs and their components, developing a nationwide charging infrastructure, and offering consumer-side incentives like lower registration fees and import duties. The government has allocated Rs9 billion in subsidies to support the installation of 3,000 new charging stations, a crucial step in alleviating 'range anxiety' among potential EV owners.</p>
+                    <h3>Economic and Environmental Impact</h3>
+                    <p>The shift to EVs is projected to save Pakistan up to $1 billion annually in oil imports. Environmentally, the reduction in tailpipe emissions will significantly improve air quality in major cities like Lahore and Karachi, which frequently rank among the world's most polluted. The policy is expected to contribute to a 4.5 million-ton reduction in CO₂ emissions per year, aligning with Pakistan's international climate commitments.</p>
+                `
+            },
+            {
+                id: 2,
+                title: "AC vs. DC Fast Charging: Choosing the Right Charger",
+                author: "Bilal Ahmed",
+                date: "October 15, 2023",
+                image: "https://images.unsplash.com/photo-1622964985532-6a53743d3446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                excerpt: "As the EV ecosystem grows, understanding the difference between AC and DC charging is crucial for every driver. While AC chargers are perfect for overnight home use, DC fast chargers are the game-changers for long-distance travel...",
+                fullContent: `
+                    <p>Navigating the world of EV charging can seem complex, but it primarily boils down to two types: Alternating Current (AC) and Direct Current (DC). Understanding their differences is key to optimizing your EV experience.</p>
+                    <h3>AC Charging: The Everyday Solution</h3>
+                    <p>AC charging is the most common type, found in homes, workplaces, and public parking lots. These chargers provide power from the grid (which is AC) to the car's onboard charger, which then converts it to DC to charge the battery. They range from 7kW to 22kW, making them ideal for situations where the car will be parked for several hours, such as overnight or during a workday. They are cost-effective to install and sufficient for daily commuting needs.</p>
+                    <h3>DC Fast Charging: Power for the Road</h3>
+                    <p>DC fast chargers, as the name suggests, provide DC power directly to the battery, bypassing the car's onboard converter. This allows for much higher power delivery, from 60kW up to 240kW or more. A DC fast charger can replenish an EV's battery to 80% in as little as 20-45 minutes. These are strategically placed along highways and major travel routes, like the 40 stations approved for the Peshawar–Karachi motorway, making intercity EV travel a reality in Pakistan.</p>
+                `
+            },
+            {
+                id: 3,
+                title: "Mapping Pakistan's EV Motorway Network",
+                author: "Fatima Ali",
+                date: "September 28, 2023",
+                image: "https://images.unsplash.com/photo-1593292415113-c32c2a4c5a93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+                excerpt: "The plan to install 40 charging stations along the Peshawar-Karachi motorway is the backbone of Pakistan's EV revolution. This network ensures that drivers can travel the length of the country with confidence...",
+                fullContent: `
+                    <p>One of the biggest hurdles to EV adoption is 'range anxiety'—the fear of running out of power before reaching a destination. To combat this, Pakistan is building a robust charging network along its primary transport artery, the Peshawar-Karachi motorway network.</p>
+                    <h3>A Station Every 100km</h3>
+                    <p>The government and private sector partners have approved the installation of 40 charging stations. These stations will be strategically spaced approximately every 105 kilometers, well within the range of modern EVs. Each station will feature a mix of AC chargers and at least one DC fast charger to cater to different needs.</p>
+                    <h3>More Than Just Charging</h3>
+                    <p>These service areas will become hubs for EV travelers, offering amenities like cafes, rest areas, and technical support. This development not only facilitates long-distance travel but also promotes tourism and local economies along the motorway. It sends a clear signal that Pakistan is serious about creating a viable, long-term ecosystem for electric vehicles.</p>
+                `
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const blogGrid = document.getElementById('blog-grid-container');
+            const modal = document.getElementById('blog-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('modal-close');
+
+            // 1. Populate blog grid
+            function displayBlogPosts() {
+                blogGrid.innerHTML = '';
+                blogPosts.forEach(post => {
+                    const card = `
+                        <div class="blog-card">
+                            <img src="${post.image}" alt="${post.title}" class="blog-card-image">
+                            <div class="blog-card-content">
+                                <p class="blog-card-meta">By ${post.author} on ${post.date}</p>
+                                <h3 class="blog-card-title">${post.title}</h3>
+                                <p class="blog-card-excerpt">${post.excerpt}</p>
+                                <a href="#" class="cta-button read-more-btn" data-id="${post.id}">Read More</a>
+                            </div>
+                        </div>
+                    `;
+                    blogGrid.innerHTML += card;
+                });
+            }
+
+            // 2. Modal functionality
+            function openModal(post) {
+                modalTitle.textContent = post.title;
+                modalContent.innerHTML = post.fullContent;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // 3. Event Listeners
+            blogGrid.addEventListener('click', (e) => {
+                if (e.target.classList.contains('read-more-btn')) {
+                    e.preventDefault();
+                    const postId = parseInt(e.target.dataset.id, 10);
+                    const post = blogPosts.find(p => p.id === postId);
+                    if (post) {
+                        openModal(post);
+                    }
+                }
+            });
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal(); // Close if clicking on the overlay
+                }
+            });
+            
+            // Initial load
+            displayBlogPosts();
+        });
+    </script>
+
+</body>
+</html>
