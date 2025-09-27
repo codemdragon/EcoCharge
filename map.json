@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "name": "Electric Vehicle Charging Station",
+        "coords": [24.968934713559232, 67.16875254496429],
+        "details": "5.0 ★ | Main Rd | Opens 1 pm Fri",
+        "fullContent": "<h3>Electric Vehicle Charging Station</h3><p><strong>Rating:</strong> 5.0 ★ (3 reviews)</p><p><strong>Address:</strong> X569+CRF, Main Rd</p><p><strong>Hours:</strong> Opens 1 pm Friday</p><p><strong>Contact:</strong> 0347 1212774</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.968934713559232,67.16875254496429",
+        "kw": 7,
+        "chargeTime": "6-8 hours"
+    },
+    {
+        "id": 2,
+        "name": "ABB Charging Station",
+        "coords": [24.99196392557935, 67.21578776379313],
+        "details": "4.6 ★ | Karachi - Hyderabad Motorway | 50 kW",
+        "fullContent": "<h3>ABB Charging Station</h3><p><strong>Rating:</strong> 4.6 ★ (25 reviews)</p><p><strong>Address:</strong> X6P8+676, Karachi - Hyderabad Motorway</p><p><strong>Hours:</strong> Open 24 hours</p><p><strong>Charger Info:</strong> CHAdeMO · 50 kW</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.99196392557935,67.21578776379313",
+        "kw": 50,
+        "chargeTime": "20-45 minutes"
+    },
+    {
+        "id": 3,
+        "name": "BMW Destination Charging Station",
+        "coords": [24.85092226848646, 67.02832983137661],
+        "details": "4.0 ★ | 4 Club Rd | 22 kW",
+        "fullContent": "<h3>BMW Destination Charging Station</h3><p><strong>Rating:</strong> 4.0 ★ (1 review)</p><p><strong>Address:</strong> 4 Club Rd</p><p><strong>Hours:</strong> Closes 11 pm</p><p><strong>Contact:</strong> 0323 2355139</p><p><strong>Charger Info:</strong> Type 2 · 22 kW (2 chargers)</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.85092226848646,67.02832983137661",
+        "kw": 22,
+        "chargeTime": "4-8 hours"
+    },
+    {
+        "id": 4,
+        "name": "BMW Destination Charging Station",
+        "coords": [24.848386510584533, 67.0252359320648],
+        "details": "5.0 ★ | 4 Club Rd | 22 kW",
+        "fullContent": "<h3>BMW Destination Charging Station</h3><p><strong>Rating:</strong> 5.0 ★ (2 reviews)</p><p><strong>Address:</strong> 4 Club Rd</p><p><strong>Hours:</strong> Open 24 hours</p><p><strong>Contact:</strong> 0333 2391199</p><p><strong>Charger Info:</strong> Type 2 · 22 kW (2 chargers)</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.848386510584533,67.0252359320648",
+        "kw": 22,
+        "chargeTime": "4-8 hours"
+    },
+    {
+        "id": 5,
+        "name": "BMW Destination Charging Station",
+        "coords": [24.846665788123563, 66.99449654535394],
+        "details": "No reviews | 3-A Food St Rd | 22 kW",
+        "fullContent": "<h3>BMW Destination Charging Station</h3><p><strong>Rating:</strong> No reviews</p><p><strong>Address:</strong> 3-A Food St Rd</p><p><strong>Hours:</strong> Open 24 hours</p><p><strong>Contact:</strong> (021) 35205244</p><p><strong>Charger Info:</strong> Type 2 · 22 kW (1 charger)</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.846665788123563,66.99449654535394",
+        "kw": 22,
+        "chargeTime": "4-8 hours"
+    },
+    {
+        "id": 6,
+        "name": "Electric Vehicle Charging Station",
+        "coords": [24.902880137751723, 67.11592830884743],
+        "details": "2.8 ★ | Shell Askari IV, Rashid Minhas Rd",
+        "fullContent": "<h3>Electric Vehicle Charging Station</h3><p><strong>Rating:</strong> 2.8 ★ (12 reviews)</p><p><strong>Address:</strong> Shell Askari IV Gulistan e Johar, Rashid Minhas Rd</p><p><strong>Details:</strong> Located near McDonalds</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.902880137751723,67.11592830884743",
+        "kw": 7,
+        "chargeTime": "6-8 hours"
+    },
+    {
+        "id": 7,
+        "name": "BMW Charging Station",
+        "coords": [24.871891792704453, 67.08708919657282],
+        "details": "3.9 ★ | V39P+HQ9 | Closes 6 pm",
+        "fullContent": "<h3>BMW Charging Station</h3><p><strong>Rating:</strong> 3.9 ★ (21 reviews)</p><p><strong>Address:</strong> V39P+HQ9</p><p><strong>Hours:</strong> Closes 6 pm</p><p><strong>Contact:</strong> (021) 34323693</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.871891792704453,67.08708919657282",
+        "kw": 22,
+        "chargeTime": "4-8 hours"
+    },
+    {
+        "id": 8,
+        "name": "RA Engineering Pvt LTD",
+        "coords": [24.899766082705305, 67.07764782053054],
+        "details": "4.0 ★ | Mashrique Center",
+        "fullContent": "<h3>RA Engineering Pvt LTD</h3><p><strong>Rating:</strong> 4.0 ★ (8 reviews)</p><p><strong>Address:</strong> Suite#216-217, Mashrique Center</p><p><strong>Hours:</strong> Opens Mon 9 am</p><p><strong>Contact:</strong> 0323 3229509</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.899766082705305,67.07764782053054",
+        "kw": 7,
+        "chargeTime": "6-8 hours"
+    },
+    {
+        "id": 9,
+        "name": "GO Petroleum - Libra Autos",
+        "coords": [24.85654593460231, 67.0264804797363],
+        "details": "4.6 ★ | Fastest EV charger in Karachi",
+        "fullContent": "<h3>GO Petroleum - Libra Autos</h3><p><strong>Rating:</strong> 4.6 ★ (5 reviews)</p><p><strong>Address:</strong> V23G+MGQ</p><p><strong>Hours:</strong> Open 24 hours</p><p><strong>Details:</strong> Claimed to be the fastest EV charger in Karachi.</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.85654593460231,67.0264804797363",
+        "kw": 60,
+        "chargeTime": "20-45 minutes"
+    },
+    {
+        "id": 10,
+        "name": "Ali (Solar)",
+        "coords": [24.83698289269176, 67.169729563884],
+        "details": "4.4 ★ | Solar system installations",
+        "fullContent": "<h3>Ali (Solar Installations)</h3><p><strong>Rating:</strong> 4.4 ★ (5 reviews)</p><p><strong>Address:</strong> R5M9+WRF, Street Number 5</p><p><strong>Contact:</strong> 0314 5928602</p><p><strong>Details:</strong> Specializes in solar system installations.</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.83698289269176,67.169729563884",
+        "kw": 7,
+        "chargeTime": "6-8 hours"
+    },
+    {
+        "id": 11,
+        "name": "Shell Recharge Charging Station",
+        "coords": [24.82059401163278, 67.06556420250148],
+        "details": "4.3 ★ | Khayaban-e-Bahria | Temporarily closed",
+        "fullContent": "<h3>Shell Recharge Charging Station</h3><p><strong>Rating:</strong> 4.3 ★ (8 reviews)</p><p><strong>Address:</strong> 39 Khayaban-e-Bahria</p><p><strong>Hours:</strong> Temporarily closed</p><p><strong>Contact:</strong> 0301 5061829</p>",
+        "googleMapsLink": "https://www.google.com/maps?q=24.82059401163278,67.06556420250148",
+        "kw": 50,
+        "chargeTime": "20-45 minutes"
+    }
+]
