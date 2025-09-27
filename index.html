@@ -65,8 +65,23 @@
         section { padding: 80px 0; }
         .section-title { font-size: 32px; font-weight: 700; text-align: center; margin-bottom: 50px; position: relative; }
         .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--gradient); border-radius: 2px; }
-        .chargers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .charger-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 25px; transition: transform 0.3s; }
+        
+        /* Updated charger grid to have two columns with proper spacing */
+        .chargers-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 30px; 
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .charger-card { 
+            background: var(--white); 
+            border-radius: var(--radius); 
+            box-shadow: var(--shadow); 
+            padding: 25px; 
+            transition: transform 0.3s; 
+        }
         .charger-card:hover { transform: translateY(-5px); }
         .charger-icon { width: 50px; height: 50px; background: var(--gradient); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; margin-bottom: 15px; }
         .charger-title { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
@@ -93,8 +108,56 @@
         .footer-column ul li a { color: var(--gray-light); text-decoration: none; transition: color 0.3s; }
         .footer-column ul li a:hover { color: var(--primary); }
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: var(--gray-light); font-size: 14px; }
-        @media (max-width: 992px) { .hero-content { flex-direction: column; } .chargers-grid { grid-template-columns: repeat(2, 1fr); } .footer-content { flex-direction: column; gap: 40px; } }
-        @media (max-width: 768px) { .nav-links { display: none; } .hero-title { font-size: 36px; } .chargers-grid { grid-template-columns: 1fr; } .footer-links { flex-direction: column; gap: 30px; } .hero-buttons { flex-direction: column; } }
+
+        /* Mobile Navigation */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) { 
+            .hero-content { flex-direction: column; } 
+            .footer-content { flex-direction: column; gap: 40px; } 
+        }
+
+        @media (max-width: 768px) { 
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                gap: 30px;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .cta-button {
+                display: none;
+            }
+            
+            .hero-title { font-size: 36px; } 
+            .chargers-grid { grid-template-columns: 1fr; } 
+            .footer-links { flex-direction: column; gap: 30px; } 
+            .hero-buttons { flex-direction: column; } 
+        }
     </style>
 </head>
 <body>
@@ -102,7 +165,7 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo"><div class="logo-icon">EC</div>EcoCharge</a>
-                <div class="nav-links">
+                <div class="nav-links" id="navLinks">
                     <a href="#chargers" class="active">EV Chargers</a>
                     <a href="map.html">Charging Map</a>
                     <a href="cleanair.html">Clean Air</a>
@@ -111,6 +174,9 @@
                     <a href="#podcasts">Podcasts</a>
                 </div>
                 <a href="#contact" class="cta-button">Get Consultation</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
             </nav>
         </div>
     </header>
@@ -176,13 +242,6 @@
                     <p class="charger-description">60kW–240kW high-power charging for intercity travel.</p>
                     <div class="charger-details"><p><strong>Power:</strong> 60kW - 240kW</p><p><strong>Charge Time:</strong> 20-45 minutes</p></div>
                     <a href="map.html" class="charger-link">Find Fast Chargers <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="charger-card">
-                    <div class="charger-icon"><i class="fas fa-road"></i></div>
-                    <h3 class="charger-title">Motorway Network</h3>
-                    <p class="charger-description">40 approved charging stations on Peshawar–Karachi route.</p>
-                    <div class="charger-details"><p><strong>Stations:</strong> 40 Approved</p><p><strong>Spacing:</strong> ~105km</p></div>
-                    <a href="map.html" class="charger-link">View Route Map <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
             <div class="map-container">
@@ -269,7 +328,7 @@
                 document.getElementById('co2-result').textContent = 'Please enter valid values';
             }
         });
-        
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -282,7 +341,7 @@
                 }
             });
         });
-        
+
         // Update active nav link on scroll
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('section');
@@ -314,14 +373,32 @@
                 attribution: '© OpenStreetMap contributors © CARTO'
             }).addTo(homeMap);
 
-            fetch('map.json')
-                .then(response => response.json())
-                .then(stations => {
-                    stations.forEach(station => {
-                        const marker = L.marker(station.coords).addTo(homeMap);
-                        marker.bindPopup(`<b>${station.name}</b><br><a href="map.html">View details</a>`);
-                    });
+            // Mobile menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
                 });
+            });
+            
+            // Sample stations data (replace with your actual data from map.json)
+            const sampleStations = [
+                { name: "Karachi Station", coords: [24.86, 67.01] },
+                { name: "Lahore Station", coords: [31.52, 74.36] },
+                { name: "Islamabad Station", coords: [33.69, 73.06] }
+            ];
+            
+            sampleStations.forEach(station => {
+                const marker = L.marker(station.coords).addTo(homeMap);
+                marker.bindPopup(`<b>${station.name}</b><br><a href="map.html">View details</a>`);
+            });
         });
     </script>
 </body>
