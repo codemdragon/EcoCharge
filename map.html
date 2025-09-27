@@ -28,6 +28,17 @@
         .nav-links a.active::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: var(--gradient); }
         .cta-button { background: var(--gradient); color: white; border: none; padding: 10px 20px; border-radius: var(--radius); font-weight: 600; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
         .cta-button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3); }
+        
+        /* Mobile Navigation */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
         section { padding: 80px 0; }
         .section-title { font-size: 32px; font-weight: 700; text-align: center; margin-bottom: 20px; position: relative; }
         .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--gradient); border-radius: 2px; }
@@ -84,7 +95,59 @@
         .footer-column ul li { margin-bottom: 10px; }
         .footer-column ul li a { color: var(--gray-light); text-decoration: none; }
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 14px; }
-        @media (max-width: 768px) { .nav-links { display: none; } .stations-grid { grid-template-columns: 1fr; } }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                gap: 30px;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .cta-button {
+                display: none;
+            }
+            
+            .map-filters {
+                flex-wrap: wrap;
+            }
+            
+            .stations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #map-container {
+                height: 50vh;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -92,7 +155,7 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo"><div class="logo-icon">EC</div>EcoCharge</a>
-                <div class="nav-links">
+                <div class="nav-links" id="navLinks">
                     <a href="index.html#chargers">EV Chargers</a>
                     <a href="map.html" class="active">Charging Map</a>
                     <a href="cleanair.html">Clean Air</a>
@@ -101,6 +164,9 @@
                     <a href="index.html#podcasts">Podcasts</a>
                 </div>
                 <a href="#contact" class="cta-button">Get Consultation</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
             </nav>
         </div>
     </header>
@@ -168,6 +234,23 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu functionality
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+
+                // Close menu when clicking on a link
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                    });
+                });
+            }
+
             const modal = document.getElementById('station-modal');
             const modalTitle = document.getElementById('modal-title');
             const modalContentBody = document.getElementById('modal-content-body');
