@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoCharge — Pakistan's Electric Future</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
     <style>
         :root {
             --primary: #10b981;
@@ -19,584 +20,91 @@
             --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 24px;
-            color: var(--dark);
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a.active {
-            color: var(--primary);
-        }
-
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--gradient);
-        }
-
-        .cta-button {
-            background: var(--gradient);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: var(--radius);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0) 70%);
-            border-radius: 50%;
-        }
-
-        .hero-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .hero-text {
-            flex: 1;
-            max-width: 600px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .hero-title {
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, var(--dark), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-description {
-            font-size: 18px;
-            color: var(--gray);
-            margin-bottom: 30px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .secondary-button {
-            background: transparent;
-            color: var(--dark);
-            border: 1px solid var(--gray-light);
-            padding: 10px 20px;
-            border-radius: var(--radius);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .secondary-button:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: var(--gray);
-        }
-
-        .hero-visual {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        .carbon-calculator {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 25px;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .calculator-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .calculator-title i {
-            color: var(--primary);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--gray-light);
-            border-radius: var(--radius);
-            font-size: 14px;
-            transition: border 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        .calculator-result {
-            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .result-title {
-            font-size: 14px;
-            color: var(--gray);
-            margin-bottom: 10px;
-        }
-
-        .result-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .result-description {
-            font-size: 12px;
-            color: var(--gray);
-        }
-
-        /* Sections */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            font-size: 32px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--gradient);
-            border-radius: 2px;
-        }
-
-        /* Chargers Section */
-        .chargers-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .charger-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 25px;
-            transition: transform 0.3s;
-        }
-
-        .charger-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .charger-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .charger-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .charger-description {
-            font-size: 14px;
-            color: var(--gray);
-            margin-bottom: 15px;
-        }
-
-        .charger-details {
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        .charger-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* Map Section */
-        .map-container {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 25px;
-            margin-top: 30px;
-        }
-
-        .map-placeholder {
-            height: 400px;
-            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-            border-radius: var(--radius);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-        }
-
-        .map-placeholder i {
-            font-size: 48px;
-            margin-bottom: 15px;
-            opacity: 0.5;
-        }
-
-        /* Podcast Section */
-        .podcast-section {
-            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-            text-align: center;
-        }
-
-        .work-in-progress {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 60px 40px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .work-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 30px;
-            margin: 0 auto 20px;
-        }
-
-        .work-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .work-description {
-            color: var(--gray);
-            margin-bottom: 30px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: var(--light);
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-        }
-
-        .footer-info {
-            max-width: 300px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .footer-description {
-            color: var(--gray-light);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 50px;
-        }
-
-        .footer-column h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 30px;
-            height: 2px;
-            background: var(--primary);
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-column ul li a {
-            color: var(--gray-light);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-column ul li a:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--gray-light);
-            font-size: 14px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-            }
-            
-            .chargers-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                gap: 40px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero-title {
-                font-size: 36px;
-            }
-            
-            .chargers-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background-color: var(--white); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 100; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 24px; color: var(--dark); text-decoration: none; }
+        .logo-icon { width: 40px; height: 40px; background: var(--gradient); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--dark); text-decoration: none; font-weight: 500; transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a.active { color: var(--primary); }
+        .nav-links a.active::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: var(--gradient); }
+        .cta-button { background: var(--gradient); color: white; border: none; padding: 10px 20px; border-radius: var(--radius); font-weight: 600; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3); }
+        .hero { padding: 80px 0; background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0) 70%); border-radius: 50%; }
+        .hero-content { display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+        .hero-text { flex: 1; max-width: 600px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.1); color: var(--primary); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 20px; }
+        .hero-title { font-size: 48px; font-weight: 700; line-height: 1.2; margin-bottom: 20px; background: linear-gradient(to right, var(--dark), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-description { font-size: 18px; color: var(--gray); margin-bottom: 30px; }
+        .hero-buttons { display: flex; gap: 15px; }
+        .secondary-button { background: transparent; color: var(--dark); border: 1px solid var(--gray-light); padding: 10px 20px; border-radius: var(--radius); font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; }
+        .secondary-button:hover { border-color: var(--primary); color: var(--primary); }
+        .hero-stats { display: flex; gap: 30px; margin-top: 50px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 14px; color: var(--gray); }
+        .hero-visual { flex: 1; display: flex; justify-content: center; }
+        .carbon-calculator { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 25px; width: 100%; max-width: 400px; }
+        .calculator-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .calculator-title i { color: var(--primary); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 14px; font-weight: 500; color: var(--dark); }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--gray-light); border-radius: var(--radius); font-size: 14px; transition: border 0.3s; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary); }
+        .form-row { display: flex; gap: 15px; }
+        .form-row .form-group { flex: 1; }
+        .calculator-result { background: linear-gradient(135deg, #f0fdf4, #ecfdf5); border-radius: var(--radius); padding: 20px; margin-top: 20px; text-align: center; }
+        .result-title { font-size: 14px; color: var(--gray); margin-bottom: 10px; }
+        .result-value { font-size: 28px; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+        .result-description { font-size: 12px; color: var(--gray); }
+        section { padding: 80px 0; }
+        .section-title { font-size: 32px; font-weight: 700; text-align: center; margin-bottom: 50px; position: relative; }
+        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--gradient); border-radius: 2px; }
+        .chargers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .charger-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 25px; transition: transform 0.3s; }
+        .charger-card:hover { transform: translateY(-5px); }
+        .charger-icon { width: 50px; height: 50px; background: var(--gradient); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; margin-bottom: 15px; }
+        .charger-title { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+        .charger-description { font-size: 14px; color: var(--gray); margin-bottom: 15px; }
+        .charger-details { font-size: 14px; margin-bottom: 15px; }
+        .charger-link { color: var(--primary); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 5px; }
+        .map-container { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 25px; margin-top: 30px; }
+        #home-map { height: 400px; border-radius: var(--radius); }
+        .podcast-section { background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); text-align: center; }
+        .work-in-progress { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 60px 40px; max-width: 600px; margin: 0 auto; }
+        .work-icon { width: 80px; height: 80px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; margin: 0 auto 20px; }
+        .work-title { font-size: 24px; font-weight: 600; margin-bottom: 10px; }
+        .work-description { color: var(--gray); margin-bottom: 30px; }
+        footer { background: var(--dark); color: var(--light); padding: 60px 0 30px; }
+        .footer-content { display: flex; justify-content: space-between; margin-bottom: 40px; }
+        .footer-info { max-width: 300px; }
+        .footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; margin-bottom: 15px; }
+        .footer-description { color: var(--gray-light); margin-bottom: 20px; }
+        .footer-links { display: flex; gap: 50px; }
+        .footer-column h3 { font-size: 18px; margin-bottom: 20px; position: relative; }
+        .footer-column h3::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 30px; height: 2px; background: var(--primary); }
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 10px; }
+        .footer-column ul li a { color: var(--gray-light); text-decoration: none; transition: color 0.3s; }
+        .footer-column ul li a:hover { color: var(--primary); }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: var(--gray-light); font-size: 14px; }
+        @media (max-width: 992px) { .hero-content { flex-direction: column; } .chargers-grid { grid-template-columns: repeat(2, 1fr); } .footer-content { flex-direction: column; gap: 40px; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .hero-title { font-size: 36px; } .chargers-grid { grid-template-columns: 1fr; } .footer-links { flex-direction: column; gap: 30px; } .hero-buttons { flex-direction: column; } }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">
-                    <div class="logo-icon">EC</div>
-                    EcoCharge
-                </a>
+                <a href="index.html" class="logo"><div class="logo-icon">EC</div>EcoCharge</a>
                 <div class="nav-links">
                     <a href="#chargers" class="active">EV Chargers</a>
-                    <a href="#map">Charging Map</a>
+                    <a href="map.html">Charging Map</a>
                     <a href="cleanair.html">Clean Air</a>
                     <a href="research.html">Research</a>
                     <a href="blog.html">Blog</a>
@@ -607,93 +115,38 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <div class="hero-badge">
-                        <i class="fas fa-bolt"></i>
-                        20+ Charging Stations Nationwide
-                    </div>
+                    <div class="hero-badge"><i class="fas fa-bolt"></i>20+ Charging Stations Nationwide</div>
                     <h1 class="hero-title">Pakistan's Premium Electric Future Starts Here</h1>
                     <p class="hero-description">Leading Pakistan's transition to sustainable transportation with premium EV charging infrastructure, innovative clean air solutions, and comprehensive research.</p>
-                    
                     <div class="hero-buttons">
-                        <a href="#chargers" class="cta-button">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Find EV Chargers
-                        </a>
-                        <a href="#research" class="secondary-button">
-                            <i class="fas fa-download"></i>
-                            Download Research
-                        </a>
+                        <a href="#chargers" class="cta-button"><i class="fas fa-map-marker-alt"></i>Find EV Chargers</a>
+                        <a href="research.html" class="secondary-button"><i class="fas fa-download"></i>Download Research</a>
                     </div>
-                    
                     <div class="hero-stats">
-                        <div class="stat">
-                            <div class="stat-value">4.5M</div>
-                            <div class="stat-label">Tons CO₂ Reduction/Year</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">$1B</div>
-                            <div class="stat-label">Annual Savings Target</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">15,000</div>
-                            <div class="stat-label">EVs Currently on Road</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">30%</div>
-                            <div class="stat-label">EV Target by 2030</div>
-                        </div>
+                        <div class="stat"><div class="stat-value">4.5M</div><div class="stat-label">Tons CO₂ Reduction/Year</div></div>
+                        <div class="stat"><div class="stat-value">$1B</div><div class="stat-label">Annual Savings Target</div></div>
+                        <div class="stat"><div class="stat-value">15,000</div><div class="stat-label">EVs Currently on Road</div></div>
+                        <div class="stat"><div class="stat-value">30%</div><div class="stat-label">EV Target by 2030</div></div>
                     </div>
                 </div>
-                
                 <div class="hero-visual">
                     <div class="carbon-calculator">
-                        <h3 class="calculator-title">
-                            <i class="fas fa-leaf"></i>
-                            Carbon Credits Calculator
-                        </h3>
-                        
+                        <h3 class="calculator-title"><i class="fas fa-leaf"></i>Carbon Credits Calculator</h3>
                         <form id="carbon-form">
                             <div class="form-row">
-                                <div class="form-group">
-                                    <label for="vehicle-type">Vehicle Type</label>
-                                    <select id="vehicle-type">
-                                        <option value="car">Car</option>
-                                        <option value="suv">SUV</option>
-                                        <option value="truck">Truck</option>
-                                        <option value="bus">Bus</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="annual-distance">Annual Distance (km)</label>
-                                    <input type="number" id="annual-distance" value="15000">
-                                </div>
+                                <div class="form-group"><label for="vehicle-type">Vehicle Type</label><select id="vehicle-type"><option value="car">Car</option><option value="suv">SUV</option><option value="truck">Truck</option><option value="bus">Bus</option></select></div>
+                                <div class="form-group"><label for="annual-distance">Annual Distance (km)</label><input type="number" id="annual-distance" value="15000"></div>
                             </div>
-                            
                             <div class="form-row">
-                                <div class="form-group">
-                                    <label for="fuel-type">Fuel Type</label>
-                                    <select id="fuel-type">
-                                        <option value="petrol">Petrol</option>
-                                        <option value="diesel">Diesel</option>
-                                        <option value="cng">CNG</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="fuel-efficiency">Fuel Efficiency (km/l)</label>
-                                    <input type="number" id="fuel-efficiency" value="12">
-                                </div>
+                                <div class="form-group"><label for="fuel-type">Fuel Type</label><select id="fuel-type"><option value="petrol">Petrol</option><option value="diesel">Diesel</option><option value="cng">CNG</option></select></div>
+                                <div class="form-group"><label for="fuel-efficiency">Fuel Efficiency (km/l)</label><input type="number" id="fuel-efficiency" value="12"></div>
                             </div>
-                            
-                            <button type="button" id="calculate-btn" class="cta-button" style="width: 100%; margin-top: 10px;">
-                                Calculate Carbon Impact
-                            </button>
+                            <button type="button" id="calculate-btn" class="cta-button" style="width: 100%; margin-top: 10px;">Calculate Carbon Impact</button>
                         </form>
-                        
                         <div class="calculator-result">
                             <div class="result-title">Estimated CO₂ Saved</div>
                             <div class="result-value" id="co2-result">0 tCO₂/year</div>
@@ -705,79 +158,47 @@
         </div>
     </section>
 
-    <!-- Chargers Section -->
     <section id="chargers">
         <div class="container">
             <h2 class="section-title">EV Charging Infrastructure</h2>
             <p style="text-align: center; color: var(--gray); max-width: 800px; margin: 0 auto 40px;">Pakistan's comprehensive network of EV charging stations with 3,000 new stations planned and Rs9 billion in government subsidies.</p>
-            
             <div class="chargers-grid">
                 <div class="charger-card">
-                    <div class="charger-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
+                    <div class="charger-icon"><i class="fas fa-home"></i></div>
                     <h3 class="charger-title">AC Chargers</h3>
                     <p class="charger-description">7kW–22kW for routine use at malls, offices, and residences.</p>
-                    <div class="charger-details">
-                        <p><strong>Power:</strong> 7kW - 22kW</p>
-                        <p><strong>Charge Time:</strong> 4-8 hours</p>
-                    </div>
-                    <a href="#map" class="charger-link">
-                        Find AC Chargers <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <div class="charger-details"><p><strong>Power:</strong> 7kW - 22kW</p><p><strong>Charge Time:</strong> 4-8 hours</p></div>
+                    <a href="map.html" class="charger-link">Find AC Chargers <i class="fas fa-arrow-right"></i></a>
                 </div>
-                
                 <div class="charger-card">
-                    <div class="charger-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
+                    <div class="charger-icon"><i class="fas fa-bolt"></i></div>
                     <h3 class="charger-title">DC Fast Chargers</h3>
                     <p class="charger-description">60kW–240kW high-power charging for intercity travel.</p>
-                    <div class="charger-details">
-                        <p><strong>Power:</strong> 60kW - 240kW</p>
-                        <p><strong>Charge Time:</strong> 20-45 minutes</p>
-                    </div>
-                    <a href="#map" class="charger-link">
-                        Find Fast Chargers <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <div class="charger-details"><p><strong>Power:</strong> 60kW - 240kW</p><p><strong>Charge Time:</strong> 20-45 minutes</p></div>
+                    <a href="map.html" class="charger-link">Find Fast Chargers <i class="fas fa-arrow-right"></i></a>
                 </div>
-                
                 <div class="charger-card">
-                    <div class="charger-icon">
-                        <i class="fas fa-road"></i>
-                    </div>
+                    <div class="charger-icon"><i class="fas fa-road"></i></div>
                     <h3 class="charger-title">Motorway Network</h3>
                     <p class="charger-description">40 approved charging stations on Peshawar–Karachi route.</p>
-                    <div class="charger-details">
-                        <p><strong>Stations:</strong> 40 Approved</p>
-                        <p><strong>Spacing:</strong> ~105km</p>
-                    </div>
-                    <a href="#map" class="charger-link">
-                        View Route Map <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <div class="charger-details"><p><strong>Stations:</strong> 40 Approved</p><p><strong>Spacing:</strong> ~105km</p></div>
+                    <a href="map.html" class="charger-link">View Route Map <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-            
             <div class="map-container">
                 <h3 style="margin-bottom: 15px;">Charging Station Map</h3>
                 <p style="color: var(--gray); margin-bottom: 20px;">Find the nearest charging station to your location</p>
-                <div class="map-placeholder">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <p>Interactive charging station map</p>
-                    <p style="font-size: 14px; margin-top: 10px;">Add your API key to enable the interactive map</p>
-                </div>
+                <div id="home-map"></div>
+                <a href="map.html" class="cta-button" style="display: block; text-align: center; margin-top: 20px;">View Full-Screen Interactive Map</a>
             </div>
         </div>
     </section>
 
-    <!-- Podcasts Section -->
     <section id="podcasts" class="podcast-section">
         <div class="container">
             <h2 class="section-title">EcoCharge Podcasts</h2>
             <div class="work-in-progress">
-                <div class="work-icon">
-                    <i class="fas fa-podcast"></i>
-                </div>
+                <div class="work-icon"><i class="fas fa-podcast"></i></div>
                 <h3 class="work-title">Work in Progress</h3>
                 <p class="work-description">We're working hard to bring you insightful podcasts about Pakistan's electric future. Stay tuned for updates!</p>
                 <a href="#contact" class="cta-button">Notify Me When Launched</a>
@@ -785,43 +206,36 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <div class="footer-logo">
-                        <div class="logo-icon">EC</div>
-                        EcoCharge
-                    </div>
+                    <div class="footer-logo"><div class="logo-icon">EC</div>EcoCharge</div>
                     <p class="footer-description">Leading Pakistan's transition to sustainable transportation with EV charging infrastructure, clean air solutions, and comprehensive research.</p>
                     <a href="#contact" class="cta-button">Contact Us</a>
                 </div>
-                
                 <div class="footer-links">
                     <div class="footer-column">
                         <h3>Quick Links</h3>
                         <ul>
                             <li><a href="#chargers">EV Chargers</a></li>
-                            <li><a href="#map">Charging Map</a></li>
-                            <li><a href="#clean-air">Clean Air Solutions</a></li>
-                            <li><a href="#research">Research</a></li>
-                            <li><a href="#blog">Blog</a></li>
+                            <li><a href="map.html">Charging Map</a></li>
+                            <li><a href="cleanair.html">Clean Air Solutions</a></li>
+                            <li><a href="research.html">Research</a></li>
+                            <li><a href="blog.html">Blog</a></li>
                             <li><a href="#podcasts">Podcasts</a></li>
                         </ul>
                     </div>
-                    
                     <div class="footer-column">
                         <h3>Resources</h3>
                         <ul>
                             <li><a href="#">EV Guide</a></li>
                             <li><a href="#">Carbon Calculator</a></li>
-                            <li><a href="#">Research Papers</a></li>
+                            <li><a href="research.html">Research Papers</a></li>
                             <li><a href="#">Case Studies</a></li>
                             <li><a href="#">FAQ</a></li>
                         </ul>
                     </div>
-                    
                     <div class="footer-column">
                         <h3>Contact</h3>
                         <ul>
@@ -832,13 +246,11 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2023 EcoCharge. All rights reserved.</p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2023 EcoCharge. All rights reserved.</p></div>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         // Carbon Calculator Functionality
         document.getElementById('calculate-btn').addEventListener('click', function() {
@@ -846,28 +258,13 @@
             const annualDistance = parseFloat(document.getElementById('annual-distance').value);
             const fuelType = document.getElementById('fuel-type').value;
             const fuelEfficiency = parseFloat(document.getElementById('fuel-efficiency').value);
-            
-            // Emission factors (kg CO2 per liter)
-            const emissionFactors = {
-                petrol: 2.31,
-                diesel: 2.68,
-                cng: 2.75
-            };
-            
-            // Vehicle type multipliers
-            const vehicleMultipliers = {
-                car: 1.0,
-                suv: 1.2,
-                truck: 2.5,
-                bus: 3.0
-            };
+            const emissionFactors = { petrol: 2.31, diesel: 2.68, cng: 2.75 };
+            const vehicleMultipliers = { car: 1.0, suv: 1.2, truck: 2.5, bus: 3.0 };
             
             if (annualDistance && fuelEfficiency) {
                 const fuelConsumed = annualDistance / fuelEfficiency;
                 const emissions = fuelConsumed * emissionFactors[fuelType] * vehicleMultipliers[vehicleType];
-                const emissionsInTons = (emissions / 1000).toFixed(2);
-                
-                document.getElementById('co2-result').textContent = `${emissionsInTons} tCO₂/year`;
+                document.getElementById('co2-result').textContent = `${(emissions / 1000).toFixed(2)} tCO₂/year`;
             } else {
                 document.getElementById('co2-result').textContent = 'Please enter valid values';
             }
@@ -877,16 +274,11 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
                 }
             });
         });
@@ -895,23 +287,41 @@
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-links a');
-            
             let currentSection = '';
-            
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
                 if (scrollY >= (sectionTop - 100)) {
                     currentSection = section.getAttribute('id');
                 }
             });
-            
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${currentSection}`) {
                     link.classList.add('active');
                 }
             });
+        });
+
+        // Initialize embedded map on homepage
+        document.addEventListener('DOMContentLoaded', () => {
+            const homeMap = L.map('home-map', {
+                scrollWheelZoom: false,
+                dragging: false,
+                zoomControl: false
+            }).setView([24.9, 67.1], 10);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+                attribution: '© OpenStreetMap contributors © CARTO'
+            }).addTo(homeMap);
+
+            fetch('map.json')
+                .then(response => response.json())
+                .then(stations => {
+                    stations.forEach(station => {
+                        const marker = L.marker(station.coords).addTo(homeMap);
+                        marker.bindPopup(`<b>${station.name}</b><br><a href="map.html">View details</a>`);
+                    });
+                });
         });
     </script>
 </body>
