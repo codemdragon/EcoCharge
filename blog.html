@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clean Air Solutions — EcoCharge</title>
+    <title>Blog — EcoCharge</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -25,6 +25,10 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -92,7 +96,7 @@
         .nav-links a:hover {
             color: var(--primary);
         }
-
+        
         .nav-links a.active {
             color: var(--primary);
         }
@@ -124,7 +128,7 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
         }
-
+        
         /* Mobile Navigation */
         .hamburger {
             display: none;
@@ -134,8 +138,8 @@
             color: var(--dark);
             cursor: pointer;
         }
-
-        /* Sections */
+        
+        /* Section Styles */
         section {
             padding: 80px 0;
         }
@@ -144,15 +148,8 @@
             font-size: 32px;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 50px;
             position: relative;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--gray);
-            max-width: 800px;
-            margin: 0 auto 50px;
         }
 
         .section-title::after {
@@ -167,55 +164,14 @@
             border-radius: 2px;
         }
         
-        /* Stats Grid for "Why Choose" Section */
-        .stats-grid {
+        /* Blog Grid Styles */
+        .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-        
-        .stat-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            border-top: 4px solid var(--primary);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-card-value {
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .stat-card-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .stat-card-description {
-            color: var(--gray);
-            font-size: 14px;
-        }
-
-        /* Tech Grid for "Filtration Technologies" Section */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
-
-        .tech-card {
+        
+        .blog-card {
             background: var(--white);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
@@ -225,56 +181,126 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .tech-card:hover {
+        .blog-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
         }
 
-        .tech-card-header {
+        .blog-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-card-content {
             padding: 25px;
-            background: var(--gradient);
-            color: var(--white);
-        }
-
-        .tech-card-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .tech-card-body {
-            padding: 25px;
+            display: flex;
+            flex-direction: column;
             flex-grow: 1;
         }
 
-        .tech-card-description {
-            font-size: 15px;
+        .blog-card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .blog-card-meta {
+            font-size: 12px;
             color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .blog-card-excerpt {
+            font-size: 14px;
+            color: var(--gray);
+            flex-grow: 1;
             margin-bottom: 20px;
         }
         
-        .tech-card-details {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 14px;
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
         }
         
-        .tech-card-details li {
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
             display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--gray-light);
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            transform: scale(0.95);
+            transition: transform 0.3s;
         }
 
-        .tech-card-details li:last-child {
-            border-bottom: none;
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
         }
-        
-        .tech-card-details strong {
+
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 600;
             color: var(--dark);
         }
 
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--dark);
+        }
+
+        .modal-content {
+            padding: 30px;
+            overflow-y: auto;
+            line-height: 1.7;
+        }
+        
+        .modal-content p {
+            margin-bottom: 1.5em;
+        }
+        
+        .modal-content h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+        
         /* Footer */
         footer {
             background: var(--dark);
@@ -353,14 +379,7 @@
             font-size: 14px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .footer-content {
-                flex-direction: column;
-                gap: 40px;
-            }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
@@ -380,6 +399,7 @@
                 gap: 30px;
                 transition: left 0.3s ease;
                 box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                display: flex;
             }
             
             .nav-links.active {
@@ -388,28 +408,6 @@
             
             .cta-button {
                 display: none;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .tech-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .section-title {
-                font-size: 28px;
-            }
-            
-            .stat-card-value {
-                font-size: 36px;
             }
         }
     </style>
@@ -426,12 +424,12 @@
                 <div class="nav-links" id="navLinks">
                     <a href="index.html#chargers">EV Chargers</a>
                     <a href="map.html">Charging Map</a>
-                    <a href="cleanair.html" class="active">Clean Air</a>
+                    <a href="cleanair.html">Clean Air</a>
                     <a href="research.html">Research</a>
-                    <a href="blog.html">Blog</a>
+                    <a href="blog.html" class="active">Blog</a>
                     <a href="index.html#podcasts">Podcasts</a>
                 </div>
-                <a href="#contact" class="cta-button">Get Consultation</a>
+                <a href="index.html#contact" class="cta-button">Get Consultation</a>
                 <button class="hamburger" id="hamburger">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -439,96 +437,34 @@
         </div>
     </header>
 
+    <!-- Main Blog Section -->
     <main>
-        <!-- Why Choose Clean Air Section -->
-        <section id="why-choose">
+        <section id="blog-page">
             <div class="container">
-                <h2 class="section-title">Why Choose Clean Air Solutions</h2>
-                <p class="section-subtitle">Immediate environmental impact while preparing for Pakistan's electric future.</p>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-card-value">Up to 95%</div>
-                        <h3 class="stat-card-title">Emission Reduction</h3>
-                        <p class="stat-card-description">Significant reduction in harmful emissions.</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-value">70%</div>
-                        <h3 class="stat-card-title">Health Impact</h3>
-                        <p class="stat-card-description">Improvement in overall air quality.</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-value">EURO-VI</div>
-                        <h3 class="stat-card-title">Compliance Ready</h3>
-                        <p class="stat-card-description">Meet international emission standards.</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-value">2–3 Years</div>
-                        <h3 class="stat-card-title">Return on Investment</h3>
-                        <p class="stat-card-description">Quick return on your investment.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title">The EcoCharge Blog</h2>
+                <p style="text-align: center; color: var(--gray); max-width: 800px; margin: -40px auto 50px;">
+                    Insights, news, and research on Pakistan's journey towards a sustainable, electric future.
+                </p>
 
-        <!-- Filtration Technologies Section -->
-        <section id="technologies" style="background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);">
-            <div class="container">
-                <h2 class="section-title">Advanced Filtration Technologies</h2>
-                <p class="section-subtitle">Cutting-edge solutions to reduce emissions from conventional vehicles.</p>
-                
-                <div class="tech-grid">
-                    <!-- Diesel Particulate Filters (DPF) Card -->
-                    <div class="tech-card">
-                        <div class="tech-card-header">
-                           <h3 class="tech-card-title">Diesel Particulate Filters (DPF)</h3>
-                        </div>
-                        <div class="tech-card-body">
-                           <p class="tech-card-description">Advanced filtration systems that remove 95% of particulate matter from diesel engines.</p>
-                           <ul class="tech-card-details">
-                               <li><strong>Efficiency:</strong><span>95%</span></li>
-                               <li><strong>Cost:</strong><span>Rs: 50,000 - 80,000</span></li>
-                               <li><strong>Installation:</strong><span>2-3 Hours</span></li>
-                               <li><strong>Applications:</strong><span>Trucks, Buses, Generators</span></li>
-                           </ul>
-                        </div>
-                    </div>
-
-                    <!-- Selective Catalytic Reduction (SCR) Card -->
-                    <div class="tech-card">
-                        <div class="tech-card-header">
-                           <h3 class="tech-card-title">Selective Catalytic Reduction (SCR)</h3>
-                        </div>
-                        <div class="tech-card-body">
-                           <p class="tech-card-description">Reduces NOx emissions up to 90% using urea injection technology.</p>
-                           <ul class="tech-card-details">
-                               <li><strong>Efficiency:</strong><span>90%</span></li>
-                               <li><strong>Cost:</strong><span>Rs: 75,000 - 120,000</span></li>
-                               <li><strong>Installation:</strong><span>4-6 Hours</span></li>
-                               <li><strong>Applications:</strong><span>Heavy Vehicles, Industrial Equipment</span></li>
-                           </ul>
-                        </div>
-                    </div>
-
-                    <!-- Catalytic Converters Card -->
-                    <div class="tech-card">
-                        <div class="tech-card-header">
-                           <h3 class="tech-card-title">Catalytic Converters</h3>
-                        </div>
-                        <div class="tech-card-body">
-                           <p class="tech-card-description">High efficiency converters for petrol engines reducing CO and HC emissions.</p>
-                           <ul class="tech-card-details">
-                               <li><strong>Efficiency:</strong><span>85%</span></li>
-                               <li><strong>Cost:</strong><span>Rs: 15,000 - 35,000</span></li>
-                               <li><strong>Installation:</strong><span>1-2 Hours</span></li>
-                               <li><strong>Applications:</strong><span>Cars, Motorcycles, CNG vehicles</span></li>
-                           </ul>
-                        </div>
-                    </div>
+                <div class="blog-grid" id="blog-grid-container">
+                    <!-- Blog cards will be dynamically inserted here -->
                 </div>
             </div>
         </section>
     </main>
+    
+    <!-- Blog Post Modal -->
+    <div class="modal-overlay" id="blog-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Blog Post Title</h2>
+                <button class="modal-close-btn" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-content" id="modal-content">
+                <p>Full blog content will appear here...</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer id="contact">
@@ -585,8 +521,82 @@
     </footer>
 
     <script>
-        // Mobile menu functionality
         document.addEventListener('DOMContentLoaded', () => {
+            const blogGrid = document.getElementById('blog-grid-container');
+            const modal = document.getElementById('blog-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('modal-close');
+            
+            let blogPosts = []; // Will hold our fetched data
+
+            // --- New Function to Fetch Data ---
+            async function loadBlogPosts() {
+                try {
+                    const response = await fetch('blog-posts.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    blogPosts = await response.json();
+                    displayBlogPosts();
+                } catch (error) {
+                    console.error("Could not load blog posts:", error);
+                    blogGrid.innerHTML = '<p>Sorry, we were unable to load the blog posts at this time.</p>';
+                }
+            }
+
+            // 1. Populate blog grid
+            function displayBlogPosts() {
+                blogGrid.innerHTML = '';
+                blogPosts.forEach(post => {
+                    const card = `
+                        <div class="blog-card">
+                            <img src="${post.image}" alt="${post.title}" class="blog-card-image">
+                            <div class="blog-card-content">
+                                <p class="blog-card-meta">By ${post.author} on ${post.date}</p>
+                                <h3 class="blog-card-title">${post.title}</h3>
+                                <p class="blog-card-excerpt">${post.excerpt}</p>
+                                <a href="#" class="cta-button read-more-btn" data-id="${post.id}">Read More</a>
+                            </div>
+                        </div>
+                    `;
+                    blogGrid.innerHTML += card;
+                });
+            }
+
+            // 2. Modal functionality
+            function openModal(post) {
+                modalTitle.textContent = post.title;
+                modalContent.innerHTML = post.fullContent;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // 3. Event Listeners
+            blogGrid.addEventListener('click', (e) => {
+                if (e.target.classList.contains('read-more-btn')) {
+                    e.preventDefault();
+                    const postId = parseInt(e.target.dataset.id, 10);
+                    const post = blogPosts.find(p => p.id === postId);
+                    if (post) {
+                        openModal(post);
+                    }
+                }
+            });
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Mobile menu toggle for blog page
             const hamburger = document.getElementById('hamburger');
             const navLinks = document.getElementById('navLinks');
 
@@ -602,7 +612,11 @@
                     });
                 });
             }
+            
+            // Initial load
+            loadBlogPosts(); // Call the new fetch function
         });
     </script>
+
 </body>
 </html>
