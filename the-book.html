@@ -148,7 +148,7 @@
             font-size: 32px;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 50px;
             position: relative;
         }
 
@@ -164,184 +164,156 @@
             border-radius: 2px;
         }
         
-        /* Book Header */
-        .book-header {
+        /* Book Cover Section */
+        .book-cover-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            text-align: center;
+        }
+        
+        .book-cover-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            margin-bottom: 50px;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .book-cover {
-            width: 200px;
-            height: 280px;
+            width: 100%;
+            max-width: 300px;
+            height: 400px;
             background: var(--gradient);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin-bottom: 30px;
+            border-radius: var(--radius);
             box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 30px;
         }
         
         .book-title {
-            font-size: 36px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--dark);
+            margin-bottom: 10px;
         }
         
         .book-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .book-author {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .book-description {
             font-size: 18px;
             color: var(--gray);
-            margin-bottom: 20px;
-            max-width: 600px;
-        }
-        
-        .book-meta {
-            display: flex;
-            gap: 20px;
+            line-height: 1.7;
             margin-bottom: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
         }
         
-        .book-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: var(--gray);
-        }
-        
-        /* Book Content */
-        .book-content {
-            max-width: 800px;
+        /* Chapters Section */
+        .chapters-container {
+            max-width: 900px;
             margin: 0 auto;
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
         }
         
         .chapter {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
             padding: 30px;
-            border-bottom: 1px solid var(--gray-light);
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         
-        .chapter:last-child {
-            border-bottom: none;
+        .chapter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chapter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
         }
         
         .chapter-title {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: var(--primary);
         }
         
-        .chapter-title:before {
-            content: '';
-            width: 5px;
-            height: 25px;
-            background: var(--gradient);
-            border-radius: 2px;
+        .chapter-number {
+            font-size: 14px;
+            color: var(--gray);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
         }
         
         .chapter-quote {
             font-style: italic;
-            color: var(--primary);
-            margin-bottom: 20px;
-            padding-left: 15px;
+            color: var(--gray);
             border-left: 3px solid var(--primary);
+            padding-left: 15px;
+            margin-bottom: 20px;
         }
         
         .chapter-content {
+            color: var(--dark);
             line-height: 1.7;
         }
         
         .chapter-content p {
-            margin-bottom: 1.2em;
+            margin-bottom: 15px;
         }
         
-        .chapter-content h3 {
-            margin-top: 1.5em;
-            margin-bottom: 0.8em;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .chapter-content ul, .chapter-content ol {
+        .chapter-content ul {
             margin-left: 20px;
-            margin-bottom: 1.2em;
+            margin-bottom: 15px;
         }
         
         .chapter-content li {
-            margin-bottom: 0.5em;
+            margin-bottom: 8px;
         }
         
         .read-more-btn {
-            background: transparent;
+            background: none;
+            border: none;
             color: var(--primary);
-            border: 1px solid var(--primary);
-            padding: 8px 15px;
-            border-radius: var(--radius);
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 5px;
             margin-top: 15px;
         }
         
         .read-more-btn:hover {
-            background: var(--primary);
-            color: var(--white);
+            text-decoration: underline;
         }
         
-        .chapter-content.collapsed {
-            max-height: 200px;
-            overflow: hidden;
-            position: relative;
+        .chapter-full {
+            display: none;
         }
         
-        .chapter-content.collapsed:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: linear-gradient(transparent, var(--white));
+        .chapter-full.active {
+            display: block;
         }
         
-        /* Download Section */
         .download-section {
-            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
             text-align: center;
             margin-top: 50px;
-            border-radius: var(--radius);
-            padding: 40px;
-        }
-        
-        .download-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .download-description {
-            color: var(--gray);
-            margin-bottom: 25px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            padding-top: 50px;
+            border-top: 1px solid var(--gray-light);
         }
         
         /* Footer */
@@ -453,14 +425,6 @@
                 display: none;
             }
             
-            .book-title {
-                font-size: 28px;
-            }
-            
-            .chapter {
-                padding: 20px;
-            }
-            
             .footer-content {
                 flex-direction: column;
                 gap: 40px;
@@ -469,6 +433,11 @@
             .footer-links {
                 flex-direction: column;
                 gap: 30px;
+            }
+            
+            .chapter-header {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
@@ -488,7 +457,6 @@
                     <a href="cleanair.html">Clean Air</a>
                     <a href="research.html">Research</a>
                     <a href="blog.html">Blog</a>
-                    <a href="index.html#podcasts">Podcasts</a>
                     <a href="thebook.html" class="active">The Book</a>
                 </div>
                 <a href="index.html#contact" class="cta-button">Get Consultation</a>
@@ -499,131 +467,291 @@
         </div>
     </header>
 
-    <!-- Main Book Section -->
-    <main>
-        <section id="book-page">
-            <div class="container">
-                <div class="book-header">
-                    <div class="book-cover">
-                        <i class="fas fa-book-open" style="font-size: 60px;"></i>
-                    </div>
-                    <h1 class="book-title">Breathing Clean: A Citizen's Guide to Air Quality</h1>
-                    <p class="book-subtitle">Practical solutions for cleaner air in Pakistan's urban centers</p>
-                    <div class="book-meta">
-                        <div class="book-meta-item">
-                            <i class="fas fa-user"></i>
-                            <span>Muhammad Ryan Asher</span>
-                        </div>
-                        <div class="book-meta-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>2024</span>
-                        </div>
-                        <div class="book-meta-item">
-                            <i class="fas fa-file-alt"></i>
-                            <span>11 Chapters</span>
-                        </div>
-                    </div>
-                    <a href="#" class="cta-button" id="download-pdf">
+    <!-- Book Cover Section -->
+    <section class="book-cover-section">
+        <div class="container">
+            <div class="book-cover-container">
+                <div class="book-cover">
+                    <div class="book-title">Breathing Clean</div>
+                    <div class="book-subtitle">A Citizen's Guide to Sustainable Living</div>
+                    <div class="book-author">Muhammad Ryan Asher</div>
+                </div>
+                <div>
+                    <h2 class="section-title">A Citizen's Guide to Sustainable Living</h2>
+                    <p class="book-description">
+                        This book explores practical, sustainable methods that every person can adopt — from household habits to community action — to ensure cleaner air for generations to come.
+                    </p>
+                    <a href="#download" class="cta-button">
                         <i class="fas fa-download"></i> Download PDF
                     </a>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="book-content">
-                    <!-- Chapter 1 -->
-                    <div class="chapter">
-                        <h2 class="chapter-title">Chapter 1: Introduction – The Growing Crisis of Air Pollution</h2>
-                        <p class="chapter-quote">"The air we breathe connects us all; when it is polluted, we all suffer."</p>
-                        <div class="chapter-content collapsed" id="chapter1">
-                            <p>Air pollution has become one of the greatest environmental challenges of our time. Every day, billions of people inhale a mixture of gases, particles, and toxic chemicals that silently threaten their health and the planet's stability. What was once a problem associated with industrial cities is now a global crisis affecting every continent, every community, and every breath.</p>
+    <!-- Chapters Section -->
+    <section id="chapters">
+        <div class="container">
+            <h2 class="section-title">Book Chapters</h2>
+            <div class="chapters-container">
+                
+                <!-- Chapter 1 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Introduction – The Growing Crisis of Air Pollution</h3>
+                        <span class="chapter-number">Chapter 1</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "The air we breathe connects us all; when it is polluted, we all suffer."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Air pollution has become one of the greatest environmental challenges of our time. Every day, billions of people inhale a mixture of gases, particles, and toxic chemicals that silently threaten their health and the planet's stability. What was once a problem associated with industrial cities is now a global crisis affecting every continent, every community, and every breath.</p>
+                        
+                        <div class="chapter-full" id="chapter1-full">
                             <p>In cities like Karachi, where millions of vehicles and factories operate with little regulation, smog often blankets the skyline. During winter months, visibility drops, and the smell of burning fuel lingers in the air. Residents complain of headaches, sore throats, and breathing difficulties, while hospitals see a rise in asthma and heart disease cases. Yet despite these alarming signs, many people underestimate how deeply air pollution touches their lives.</p>
                             <p>Air pollution is not just an environmental problem — it is a social, economic, and moral issue. Polluted air damages lungs, shortens lives, reduces productivity, and harms ecosystems. It contributes to climate change, disrupts food production, and even affects education by forcing schools to close during severe smog.</p>
                             <p>However, the story is not one of despair. It is one of opportunity. Every citizen, regardless of background, can play a role in reducing pollution. Whether by choosing sustainable transport, conserving energy, or spreading awareness, individuals can make real change. This book explores practical, sustainable methods that every person can adopt — from household habits to community action — to ensure cleaner air for generations to come.</p>
                         </div>
+                        
                         <button class="read-more-btn" data-chapter="1">
-                            <i class="fas fa-chevron-down"></i> Read More
+                            Read More <i class="fas fa-chevron-down"></i>
                         </button>
                     </div>
-                    
-                    <!-- Chapter 2 -->
-                    <div class="chapter">
-                        <h2 class="chapter-title">Chapter 2: Understanding Air Pollution and Its Causes</h2>
-                        <p class="chapter-quote">"Awareness is the first step toward change."</p>
-                        <div class="chapter-content collapsed" id="chapter2">
-                            <p>Before we can solve air pollution, we must understand what it truly is. Air pollution refers to the presence of harmful substances in the air that pose risks to human health, the environment, and the climate. These substances can be solid particles, liquid droplets, or gases. Some are visible, like black smoke from a factory chimney, while others are invisible yet even more dangerous.</p>
+                </div>
+                
+                <!-- Chapter 2 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Understanding Air Pollution and Its Causes</h3>
+                        <span class="chapter-number">Chapter 2</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Awareness is the first step toward change."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Before we can solve air pollution, we must understand what it truly is. Air pollution refers to the presence of harmful substances in the air that pose risks to human health, the environment, and the climate. These substances can be solid particles, liquid droplets, or gases. Some are visible, like black smoke from a factory chimney, while others are invisible yet even more dangerous.</p>
+                        
+                        <div class="chapter-full" id="chapter2-full">
                             <p>The main pollutants include:</p>
                             <ul>
-                                <li><strong>Particulate Matter (PM2.5 and PM10)</strong> – tiny particles that can enter deep into the lungs and bloodstream.</li>
-                                <li><strong>Nitrogen Oxides (NOx)</strong> – produced mainly from vehicle exhausts and industrial activity.</li>
-                                <li><strong>Sulphur Dioxide (SO₂)</strong> – released from burning fossil fuels, especially coal.</li>
-                                <li><strong>Carbon Monoxide (CO)</strong> – a colorless, odorless gas from incomplete combustion.</li>
-                                <li><strong>Ozone (O₃)</strong> – formed when sunlight reacts with other pollutants, creating harmful "smog."</li>
+                                <li>Particulate Matter (PM2.5 and PM10) – tiny particles that can enter deep into the lungs and bloodstream.</li>
+                                <li>Nitrogen Oxides (NOx) – produced mainly from vehicle exhausts and industrial activity.</li>
+                                <li>Sulphur Dioxide (SO₂) – released from burning fossil fuels, especially coal.</li>
+                                <li>Carbon Monoxide (CO) – a colorless, odorless gas from incomplete combustion.</li>
+                                <li>Ozone (O₃) – formed when sunlight reacts with other pollutants, creating harmful "smog."</li>
                             </ul>
                             <p>In Pakistan, and particularly Karachi, the major sources of air pollution include:</p>
                             <ol>
-                                <li><strong>Transport</strong> – Old vehicles, poor fuel quality, and traffic congestion release tons of exhaust every day.</li>
-                                <li><strong>Industry</strong> – Factories in Korangi, SITE, and Landhi areas often operate without emission filters.</li>
-                                <li><strong>Construction Dust</strong> – Urban development creates airborne dust that worsens air quality.</li>
-                                <li><strong>Open Waste Burning</strong> – Garbage disposal through burning is still common in many neighborhoods.</li>
-                                <li><strong>Household Activities</strong> – The use of wood, coal, or kerosene for cooking and heating releases harmful fumes.</li>
+                                <li>Transport – Old vehicles, poor fuel quality, and traffic congestion release tons of exhaust every day.</li>
+                                <li>Industry – Factories in Korangi, SITE, and Landhi areas often operate without emission filters.</li>
+                                <li>Construction Dust – Urban development creates airborne dust that worsens air quality.</li>
+                                <li>Open Waste Burning – Garbage disposal through burning is still common in many neighborhoods.</li>
+                                <li>Household Activities – The use of wood, coal, or kerosene for cooking and heating releases harmful fumes.</li>
                             </ol>
                             <p>Air pollution is not confined to one area — it travels with the wind. Pollutants from burning fields in Punjab can drift hundreds of kilometers and mix with urban emissions to form smog across entire provinces.</p>
                             <p>Understanding these causes empowers citizens to identify where their lifestyle connects to pollution — and what they can do to reduce it. The goal is not perfection but progress, through daily habits that collectively lead to cleaner air.</p>
                         </div>
+                        
                         <button class="read-more-btn" data-chapter="2">
-                            <i class="fas fa-chevron-down"></i> Read More
+                            Read More <i class="fas fa-chevron-down"></i>
                         </button>
                     </div>
-                    
-                    <!-- Chapter 3 -->
-                    <div class="chapter">
-                        <h2 class="chapter-title">Chapter 3: How Air Pollution Affects Health, Climate, and Society</h2>
-                        <p class="chapter-quote">"Clean air is not a privilege; it is a human right."</p>
-                        <div class="chapter-content collapsed" id="chapter3">
-                            <p>The impact of air pollution is both immediate and long-term. It begins with the body but ripples through the economy, environment, and society.</p>
-                            
-                            <h3>Health Impacts</h3>
+                </div>
+                
+                <!-- Chapter 3 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">How Air Pollution Affects Health, Climate, and Society</h3>
+                        <span class="chapter-number">Chapter 3</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Clean air is not a privilege; it is a human right."
+                    </div>
+                    <div class="chapter-content">
+                        <p>The impact of air pollution is both immediate and long-term. It begins with the body but ripples through the economy, environment, and society.</p>
+                        
+                        <div class="chapter-full" id="chapter3-full">
+                            <h4>Health Impacts</h4>
                             <p>Air pollution is responsible for millions of premature deaths globally each year. In Pakistan, respiratory diseases like asthma, chronic bronchitis, and lung cancer are increasingly common in urban populations. Fine particles (PM2.5) can penetrate deep into the lungs and even enter the bloodstream, leading to heart attacks and strokes. Children are particularly vulnerable because their lungs are still developing. Elderly citizens and those with pre-existing health conditions suffer the most.</p>
                             <p>Even short-term exposure to smog can cause eye irritation, coughing, and fatigue. Over time, it weakens the immune system and reduces life expectancy. For low-income communities living near industrial zones or busy roads, the effects are even more severe due to constant exposure.</p>
                             
-                            <h3>Environmental and Climate Impacts</h3>
+                            <h4>Environmental and Climate Impacts</h4>
                             <p>Polluted air also disrupts nature. Acid rain, formed when sulfur and nitrogen compounds mix with moisture, damages crops, forests, and water bodies. Dust and black carbon settle on glaciers, accelerating their melting — a major concern for Pakistan's northern regions, where glacial melt feeds rivers essential for agriculture.</p>
                             <p>Moreover, many air pollutants are also greenhouse gases that trap heat and worsen global warming. This leads to unpredictable weather, more intense heatwaves, and flooding — all of which directly threaten Pakistan's already vulnerable climate.</p>
                             
-                            <h3>Economic and Social Impacts</h3>
+                            <h4>Economic and Social Impacts</h4>
                             <p>The economic toll of air pollution is staggering. Lost workdays, healthcare costs, and decreased labor productivity drain national resources. Small businesses suffer when smog disrupts transportation or deters customers. In cities like Lahore and Karachi, schools and offices often close during heavy smog episodes, affecting education and livelihoods.</p>
                             <p>The social impact is just as serious. Pollution deepens inequality because poorer citizens often live in the most polluted neighborhoods. Clean air becomes a luxury, when it should be a basic right.</p>
                             <p>By understanding these wide-ranging consequences, we can recognize that tackling air pollution is not only an environmental duty — it's an investment in public health, economic stability, and human dignity.</p>
                         </div>
+                        
                         <button class="read-more-btn" data-chapter="3">
-                            <i class="fas fa-chevron-down"></i> Read More
+                            Read More <i class="fas fa-chevron-down"></i>
                         </button>
-                    </div>
-                    
-                    <!-- Additional chapters would follow the same pattern -->
-                    <!-- For brevity, I've included only the first 3 chapters in this example -->
-                    
-                    <!-- Author's Note -->
-                    <div class="chapter">
-                        <h2 class="chapter-title">Author's Note</h2>
-                        <div class="chapter-content">
-                            <p><strong>Written by Muhammad Ryan Asher</strong><br>
-                            A-level Student and Environmental Advocate</p>
-                            <p>This book was written to remind readers that meaningful change begins with individual action. Whether you are a student, parent, teacher, or business owner, your choices shape the world we live in.</p>
-                        </div>
                     </div>
                 </div>
                 
-                <!-- Download Section -->
-                <div class="download-section">
-                    <h3 class="download-title">Download the Complete Book</h3>
-                    <p class="download-description">Get the full PDF version of "Breathing Clean: A Citizen's Guide to Air Quality" to read offline or share with your community.</p>
-                    <a href="#" class="cta-button" id="download-pdf-bottom">
-                        <i class="fas fa-download"></i> Download PDF (2.5 MB)
-                    </a>
+                <!-- Additional chapters would follow the same pattern -->
+                <!-- I've included 3 full chapters as examples, the rest would follow the same structure -->
+                
+                <!-- Placeholder for remaining chapters -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Sustainable Transportation – Rethinking the Way We Move</h3>
+                        <span class="chapter-number">Chapter 4</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "The cleanest journey begins with a single choice."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Transportation is one of the largest contributors to air pollution worldwide — and especially in rapidly growing urban centers like Karachi. Every car, bus, truck, and motorcycle that burns fuel releases harmful gases such as carbon monoxide, nitrogen oxides, and hydrocarbons.</p>
+                        <button class="read-more-btn" data-chapter="4">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
                 </div>
+                
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Energy Efficiency at Home and Work</h3>
+                        <span class="chapter-number">Chapter 5</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Saving energy means saving the planet."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Electricity is essential to modern life — it powers our homes, offices, and industries. However, in countries like Pakistan, most electricity is generated from fossil fuels such as coal, oil, and natural gas.</p>
+                        <button class="read-more-btn" data-chapter="5">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Waste Management and Recycling for Cleaner Air</h3>
+                        <span class="chapter-number">Chapter 6</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "What we throw away doesn't disappear—it transforms into pollution."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Waste is more than just an eyesore. When mismanaged, it becomes a major source of air pollution. Across Pakistan, garbage piles up on roadsides or in empty plots, where it is often burned to reduce volume.</p>
+                        <button class="read-more-btn" data-chapter="6">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Sustainable Diets and Responsible Consumption</h3>
+                        <span class="chapter-number">Chapter 7</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Every meal is a vote for the planet."
+                    </div>
+                    <div class="chapter-content">
+                        <p>What we eat and how our food is produced have a surprisingly large impact on air quality. Food production, packaging, and transportation contribute to air pollution through fuel emissions, fertilizer use, and industrial waste.</p>
+                        <button class="read-more-btn" data-chapter="7">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Green Spaces and Urban Forestry</h3>
+                        <span class="chapter-number">Chapter 8</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "When we plant trees, we plant hope." – Wangari Maathai
+                    </div>
+                    <div class="chapter-content">
+                        <p>Trees are nature's air purifiers. They absorb carbon dioxide, release oxygen, and trap particulate matter that would otherwise remain in the air. In densely populated cities like Karachi, where pollution and heat levels are high, urban greenery plays a crucial role in creating livable spaces.</p>
+                        <button class="read-more-btn" data-chapter="8">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Education, Awareness, and Youth Engagement</h3>
+                        <span class="chapter-number">Chapter 9</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "The first step toward change is awareness."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Air pollution is not just a scientific or governmental issue — it's a social responsibility. The more people understand its causes and consequences, the more effectively they can act to prevent it.</p>
+                        <button class="read-more-btn" data-chapter="9">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Government Policies and Citizen Responsibility</h3>
+                        <span class="chapter-number">Chapter 10</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Good governance begins with good citizens."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Air pollution is not a problem that governments can solve alone — nor one that citizens can fix without support. Real change happens when policy and personal action move together.</p>
+                        <button class="read-more-btn" data-chapter="10">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">The Power of Community and Collective Action</h3>
+                        <span class="chapter-number">Chapter 11</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Alone we can do so little; together we can do so much." – Helen Keller
+                    </div>
+                    <div class="chapter-content">
+                        <p>Individual action is powerful, but when communities unite, change becomes unstoppable. Air pollution doesn't respect boundaries — clean air is everyone's right and everyone's duty.</p>
+                        <button class="read-more-btn" data-chapter="11">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Conclusion: Breathing Life Back into Our Cities</h3>
+                        <span class="chapter-number">Conclusion</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "We do not inherit the Earth from our ancestors; we borrow it from our children."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Air pollution is one of the greatest challenges of our time, but it is also one of the most solvable. Every act — whether it's planting a tree, refusing a plastic bag, or taking a bus instead of a car — contributes to the bigger picture of sustainability.</p>
+                        <button class="read-more-btn" data-chapter="12">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
             </div>
-        </section>
-    </main>
+            
+            <div class="download-section" id="download">
+                <h3>Download the Complete Book</h3>
+                <p style="color: var(--gray); margin-bottom: 20px;">
+                    Get the full PDF version of "Breathing Clean: A Citizen's Guide to Sustainable Living" to read offline or share with others.
+                </p>
+                <a href="#" class="cta-button">
+                    <i class="fas fa-download"></i> Download PDF (Coming Soon)
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer id="contact">
@@ -647,7 +775,6 @@
                             <li><a href="cleanair.html">Clean Air Solutions</a></li>
                             <li><a href="research.html">Research</a></li>
                             <li><a href="blog.html">Blog</a></li>
-                            <li><a href="index.html#podcasts">Podcasts</a></li>
                             <li><a href="thebook.html">The Book</a></li>
                         </ul>
                     </div>
@@ -700,34 +827,25 @@
             }
 
             // Read More functionality for chapters
-            const readMoreButtons = document.querySelectorAll('.read-more-btn');
+            const readMoreBtns = document.querySelectorAll('.read-more-btn');
             
-            readMoreButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const chapterId = button.getAttribute('data-chapter');
-                    const chapterContent = document.getElementById(`chapter${chapterId}`);
-                    const icon = button.querySelector('i');
+            readMoreBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const chapterId = btn.getAttribute('data-chapter');
+                    const chapterFull = document.getElementById(`chapter${chapterId}-full`);
+                    const icon = btn.querySelector('i');
                     
-                    if (chapterContent.classList.contains('collapsed')) {
-                        chapterContent.classList.remove('collapsed');
-                        button.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
+                    if (chapterFull.classList.contains('active')) {
+                        chapterFull.classList.remove('active');
+                        btn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
                     } else {
-                        chapterContent.classList.add('collapsed');
-                        button.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
+                        chapterFull.classList.add('active');
+                        btn.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
                     }
-                });
-            });
-            
-            // PDF download functionality
-            const downloadButtons = document.querySelectorAll('#download-pdf, #download-pdf-bottom');
-            
-            downloadButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    alert('The PDF download would be available here. For now, you can read the book content directly on this page.');
                 });
             });
         });
     </script>
+
 </body>
 </html>
