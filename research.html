@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research — EcoCharge</title>
+    <title>The Book — EcoCharge</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -49,7 +49,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         nav {
@@ -148,7 +148,7 @@
             font-size: 32px;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 50px;
             position: relative;
         }
 
@@ -164,231 +164,156 @@
             border-radius: 2px;
         }
         
-        /* Research Header */
-        .research-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            gap: 20px;
+        /* Book Cover Section */
+        .book-cover-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            text-align: center;
         }
         
-        .research-info {
+        .book-cover-container {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 30px;
-            font-size: 16px;
-            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .research-info-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .search-container {
-            position: relative;
+        .book-cover {
             width: 100%;
-            max-width: 400px;
-        }
-        
-        .search-input {
-            width: 100%;
-            padding: 12px 45px 12px 15px;
-            border: 1px solid var(--gray-light);
+            max-width: 300px;
+            height: 400px;
+            background: var(--gradient);
             border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 30px;
+        }
+        
+        .book-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .book-subtitle {
             font-size: 16px;
-            transition: border 0.3s;
+            opacity: 0.9;
         }
         
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        .book-author {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
         }
         
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+        .book-description {
+            font-size: 18px;
             color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 30px;
         }
         
-        /* Research Grid Styles */
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+        /* Chapters Section */
+        .chapters-container {
+            max-width: 900px;
+            margin: 0 auto;
         }
         
-        .research-card {
+        .chapter {
             background: var(--white);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            padding: 30px;
+            margin-bottom: 30px;
             transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-
-        .research-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-        }
-
-        .research-card-content {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .research-card-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-
-        .research-card-meta {
-            font-size: 14px;
-            color: var(--gray);
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .research-card-excerpt {
-            font-size: 14px;
-            color: var(--gray);
-            flex-grow: 1;
-            margin-bottom: 20px;
-            line-height: 1.5;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
         
-        .research-categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: auto;
+        .chapter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
-        .category-tag {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-        
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .modal-container {
-            background: var(--white);
-            border-radius: var(--radius);
-            width: 90%;
-            max-width: 900px;
-            max-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-            transform: scale(0.95);
-            transition: transform 0.3s;
-        }
-
-        .modal-overlay.active .modal-container {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            padding: 20px 30px;
-            border-bottom: 1px solid var(--gray-light);
+        .chapter-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            margin-bottom: 20px;
         }
         
-        .modal-header-content {
-            flex: 1;
-        }
-
-        .modal-title {
+        .chapter-title {
             font-size: 22px;
             font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 5px;
+            color: var(--primary);
         }
         
-        .modal-meta {
+        .chapter-number {
             font-size: 14px;
             color: var(--gray);
-            margin-bottom: 10px;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
         }
         
-        .modal-categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .modal-close-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
+        .chapter-quote {
+            font-style: italic;
             color: var(--gray);
-            transition: color 0.3s;
-            margin-left: 20px;
-            flex-shrink: 0;
+            border-left: 3px solid var(--primary);
+            padding-left: 15px;
+            margin-bottom: 20px;
         }
-
-        .modal-close-btn:hover {
+        
+        .chapter-content {
             color: var(--dark);
-        }
-
-        .modal-content {
-            padding: 30px;
-            overflow-y: auto;
             line-height: 1.7;
         }
         
-        .modal-content p {
-            margin-bottom: 1.5em;
+        .chapter-content p {
+            margin-bottom: 15px;
         }
         
-        .modal-content h3 {
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
+        .chapter-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-content li {
+            margin-bottom: 8px;
+        }
+        
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
             font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 15px;
+        }
+        
+        .read-more-btn:hover {
+            text-decoration: underline;
+        }
+        
+        .chapter-full {
+            display: none;
+        }
+        
+        .chapter-full.active {
+            display: block;
+        }
+        
+        .download-section {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 50px;
+            border-top: 1px solid var(--gray-light);
         }
         
         /* Footer */
@@ -500,22 +425,19 @@
                 display: none;
             }
             
-            .research-header {
+            .footer-content {
                 flex-direction: column;
-                align-items: flex-start;
+                gap: 40px;
             }
             
-            .research-info {
+            .footer-links {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .chapter-header {
                 flex-direction: column;
                 gap: 10px;
-            }
-            
-            .search-container {
-                max-width: 100%;
-            }
-            
-            .research-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -533,10 +455,9 @@
                     <a href="index.html#chargers">EV Chargers</a>
                     <a href="map.html">Charging Map</a>
                     <a href="cleanair.html">Clean Air</a>
-                    <a href="research.html" class="active">Research</a>
+                    <a href="research.html">Research</a>
                     <a href="blog.html">Blog</a>
-                    <a href="the-book.html">The Book</a>
-                    <a href="index.html#podcasts">Podcasts</a>
+                    <a href="thebook.html" class="active">The Book</a>
                 </div>
                 <a href="index.html#contact" class="cta-button">Get Consultation</a>
                 <button class="hamburger" id="hamburger">
@@ -546,61 +467,460 @@
         </div>
     </header>
 
-    <!-- Main Research Section -->
-    <main>
-        <section id="research-page">
-            <div class="container">
-                <h2 class="section-title">Pakistan EV Research Hub</h2>
-                <p style="text-align: center; color: var(--gray); max-width: 800px; margin: 0 auto 40px;">
-                    Comprehensive research on Pakistan's electric vehicle infrastructure, policy framework, and sustainable transport solutions. Access cutting-edge studies and data-driven insights.
-                </p>
-                
-                <div class="research-header">
-                    <div class="research-info">
-                        <div class="research-info-item">
-                            <i class="fas fa-file-alt"></i>
-                            <span>Number of Research Papers: <strong id="research-count">0</strong></span>
-                        </div>
-                        <div class="research-info-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Publication Years: <strong>2024 - 2025</strong></span>
-                        </div>
-                    </div>
-                    
-                    <div class="search-container">
-                        <input type="text" class="search-input" id="search-input" placeholder="Search research papers...">
-                        <i class="fas fa-search search-icon"></i>
-                    </div>
+    <!-- Book Cover Section -->
+    <section class="book-cover-section">
+        <div class="container">
+            <div class="book-cover-container">
+                <div class="book-cover">
+                    <div class="book-title">Breathing Clean</div>
+                    <div class="book-subtitle">A Citizen's Guide to Sustainable Living</div>
+                    <div class="book-author">Muhammad Ryan Asher</div>
                 </div>
-
-                <div class="research-grid" id="research-grid-container">
-                    <!-- Research cards will be dynamically inserted here -->
+                <div>
+                    <h2 class="section-title">A Citizen's Guide to Sustainable Living</h2>
+                    <p class="book-description">
+                        This book explores practical, sustainable methods that every person can adopt — from household habits to community action — to ensure cleaner air for generations to come.
+                    </p>
+                    <a href="The-Book.pdf" class="cta-button" download>
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
                 </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Research Paper Modal -->
-    <div class="modal-overlay" id="research-modal">
-        <div class="modal-container">
-            <div class="modal-header">
-                <div class="modal-header-content">
-                    <h2 class="modal-title" id="modal-title">Research Paper Title</h2>
-                    <div class="modal-meta" id="modal-meta">Author Name • Publication Date</div>
-                    <div class="modal-categories" id="modal-categories">
-                        <!-- Categories will be added here -->
-                    </div>
-                </div>
-                <button class="modal-close-btn" id="modal-close">&times;</button>
-            </div>
-            <div class="modal-content" id="modal-content">
-                <p>Full research content will appear here...</p>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Chapters Section -->
+    <section id="chapters">
+        <div class="container">
+            <h2 class="section-title">Book Chapters</h2>
+            <div class="chapters-container">
+                
+                <!-- Chapter 1 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Introduction – The Growing Crisis of Air Pollution</h3>
+                        <span class="chapter-number">Chapter 1</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "The air we breathe connects us all; when it is polluted, we all suffer."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Air pollution has become one of the greatest environmental challenges of our time. Every day, billions of people inhale a mixture of gases, particles, and toxic chemicals that silently threaten their health and the planet's stability. What was once a problem associated with industrial cities is now a global crisis affecting every continent, every community, and every breath.</p>
+                        
+                        <div class="chapter-full" id="chapter1-full">
+                            <p>In cities like Karachi, where millions of vehicles and factories operate with little regulation, smog often blankets the skyline. During winter months, visibility drops, and the smell of burning fuel lingers in the air. Residents complain of headaches, sore throats, and breathing difficulties, while hospitals see a rise in asthma and heart disease cases. Yet despite these alarming signs, many people underestimate how deeply air pollution touches their lives.</p>
+                            <p>Air pollution is not just an environmental problem — it is a social, economic, and moral issue. Polluted air damages lungs, shortens lives, reduces productivity, and harms ecosystems. It contributes to climate change, disrupts food production, and even affects education by forcing schools to close during severe smog.</p>
+                            <p>However, the story is not one of despair. It is one of opportunity. Every citizen, regardless of background, can play a role in reducing pollution. Whether by choosing sustainable transport, conserving energy, or spreading awareness, individuals can make real change. This book explores practical, sustainable methods that every person can adopt — from household habits to community action — to ensure cleaner air for generations to come.</p>
+                        </div>
+                        
+                        <button class="read-more-btn" data-chapter="1">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chapter 2 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Understanding Air Pollution and Its Causes</h3>
+                        <span class="chapter-number">Chapter 2</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Awareness is the first step toward change."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Before we can solve air pollution, we must understand what it truly is. Air pollution refers to the presence of harmful substances in the air that pose risks to human health, the environment, and the climate. These substances can be solid particles, liquid droplets, or gases. Some are visible, like black smoke from a factory chimney, while others are invisible yet even more dangerous.</p>
+                        
+                        <div class="chapter-full" id="chapter2-full">
+                            <p>The main pollutants include:</p>
+                            <ul>
+                                <li>Particulate Matter (PM2.5 and PM10) – tiny particles that can enter deep into the lungs and bloodstream.</li>
+                                <li>Nitrogen Oxides (NOx) – produced mainly from vehicle exhausts and industrial activity.</li>
+                                <li>Sulphur Dioxide (SO₂) – released from burning fossil fuels, especially coal.</li>
+                                <li>Carbon Monoxide (CO) – a colorless, odorless gas from incomplete combustion.</li>
+                                <li>Ozone (O₃) – formed when sunlight reacts with other pollutants, creating harmful "smog."</li>
+                            </ul>
+                            <p>In Pakistan, and particularly Karachi, the major sources of air pollution include:</p>
+                            <ol>
+                                <li>Transport – Old vehicles, poor fuel quality, and traffic congestion release tons of exhaust every day.</li>
+                                <li>Industry – Factories in Korangi, SITE, and Landhi areas often operate without emission filters.</li>
+                                <li>Construction Dust – Urban development creates airborne dust that worsens air quality.</li>
+                                <li>Open Waste Burning – Garbage disposal through burning is still common in many neighborhoods.</li>
+                                <li>Household Activities – The use of wood, coal, or kerosene for cooking and heating releases harmful fumes.</li>
+                            </ol>
+                            <p>Air pollution is not confined to one area — it travels with the wind. Pollutants from burning fields in Punjab can drift hundreds of kilometers and mix with urban emissions to form smog across entire provinces.</p>
+                            <p>Understanding these causes empowers citizens to identify where their lifestyle connects to pollution — and what they can do to reduce it. The goal is not perfection but progress, through daily habits that collectively lead to cleaner air.</p>
+                        </div>
+                        
+                        <button class="read-more-btn" data-chapter="2">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chapter 3 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">How Air Pollution Affects Health, Climate, and Society</h3>
+                        <span class="chapter-number">Chapter 3</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Clean air is not a privilege; it is a human right."
+                    </div>
+                    <div class="chapter-content">
+                        <p>The impact of air pollution is both immediate and long-term. It begins with the body but ripples through the economy, environment, and society.</p>
+                        
+                        <div class="chapter-full" id="chapter3-full">
+                            <h4>Health Impacts</h4>
+                            <p>Air pollution is responsible for millions of premature deaths globally each year. In Pakistan, respiratory diseases like asthma, chronic bronchitis, and lung cancer are increasingly common in urban populations. Fine particles (PM2.5) can penetrate deep into the lungs and even enter the bloodstream, leading to heart attacks and strokes. Children are particularly vulnerable because their lungs are still developing. Elderly citizens and those with pre-existing health conditions suffer the most.</p>
+                            <p>Even short-term exposure to smog can cause eye irritation, coughing, and fatigue. Over time, it weakens the immune system and reduces life expectancy. For low-income communities living near industrial zones or busy roads, the effects are even more severe due to constant exposure.</p>
+                            
+                            <h4>Environmental and Climate Impacts</h4>
+                            <p>Polluted air also disrupts nature. Acid rain, formed when sulfur and nitrogen compounds mix with moisture, damages crops, forests, and water bodies. Dust and black carbon settle on glaciers, accelerating their melting — a major concern for Pakistan's northern regions, where glacial melt feeds rivers essential for agriculture.</p>
+                            <p>Moreover, many air pollutants are also greenhouse gases that trap heat and worsen global warming. This leads to unpredictable weather, more intense heatwaves, and flooding — all of which directly threaten Pakistan's already vulnerable climate.</p>
+                            
+                            <h4>Economic and Social Impacts</h4>
+                            <p>The economic toll of air pollution is staggering. Lost workdays, healthcare costs, and decreased labor productivity drain national resources. Small businesses suffer when smog disrupts transportation or deters customers. In cities like Lahore and Karachi, schools and offices often close during heavy smog episodes, affecting education and livelihoods.</p>
+                            <p>The social impact is just as serious. Pollution deepens inequality because poorer citizens often live in the most polluted neighborhoods. Clean air becomes a luxury, when it should be a basic right.</p>
+                            <p>By understanding these wide-ranging consequences, we can recognize that tackling air pollution is not only an environmental duty — it's an investment in public health, economic stability, and human dignity.</p>
+                        </div>
+                        
+                        <button class="read-more-btn" data-chapter="3">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chapter 4 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Sustainable Transportation – Rethinking the Way We Move</h3>
+                        <span class="chapter-number">Chapter 4</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "The cleanest journey begins with a single choice."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Transportation is one of the largest contributors to air pollution worldwide — and especially in rapidly growing urban centers like Karachi. Every car, bus, truck, and motorcycle that burns fuel releases harmful gases such as carbon monoxide, nitrogen oxides, and hydrocarbons.</p>
+                        
+                        <div class="chapter-full" id="chapter4-full">
+                            <p>In cities like Karachi, traffic congestion has become a daily reality. The sheer number of vehicles on the road, combined with outdated engines and poor fuel quality, creates a toxic mix that hangs over the city. Many of these vehicles are old, inefficient, and lack modern emission controls.</p>
+                            
+                            <h4>1. Reduce Dependence on Personal Vehicles</h4>
+                            <p>One of the most effective ways to cut down on transport-related pollution is to reduce the number of cars on the road. This can be achieved through:</p>
+                            <ul>
+                                <li><strong>Carpooling:</strong> Sharing rides with colleagues or neighbors going in the same direction.</li>
+                                <li><strong>Public Transport:</strong> Using buses, trains, or other mass transit options whenever possible.</li>
+                                <li><strong>Walking or Cycling:</strong> For short distances, these are not only pollution-free but also beneficial for health.</li>
+                            </ul>
+                            
+                            <h4>2. Choose Cleaner Vehicles</h4>
+                            <p>When purchasing a vehicle, consider:</p>
+                            <ul>
+                                <li><strong>Electric Vehicles (EVs):</strong> These produce zero tailpipe emissions and are becoming more accessible.</li>
+                                <li><strong>Hybrid Vehicles:</strong> These combine electric motors with conventional engines for better fuel efficiency.</li>
+                                <li><strong>Fuel-Efficient Models:</strong> Look for vehicles with better mileage and lower emissions.</li>
+                            </ul>
+                            
+                            <h4>3. Maintain Your Vehicle</h4>
+                            <p>Regular maintenance can significantly reduce a vehicle's emissions:</p>
+                            <ul>
+                                <li>Keep tires properly inflated to improve fuel efficiency</li>
+                                <li>Change air filters regularly</li>
+                                <li>Get regular engine tune-ups</li>
+                                <li>Ensure the exhaust system is functioning properly</li>
+                            </ul>
+                            
+                            <h4>4. Support Better Infrastructure</h4>
+                            <p>Citizens can advocate for:</p>
+                            <ul>
+                                <li>Dedicated bicycle lanes</li>
+                                <li>Improved public transportation systems</li>
+                                <li>EV charging infrastructure</li>
+                                <li>Pedestrian-friendly urban planning</li>
+                            </ul>
+                            
+                            <p>By making conscious choices about how we travel, we can significantly reduce our contribution to air pollution while often saving time and money in the process.</p>
+                        </div>
+                        
+                        <button class="read-more-btn" data-chapter="4">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chapter 5 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Energy Efficiency at Home and Work</h3>
+                        <span class="chapter-number">Chapter 5</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Saving energy means saving the planet."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Electricity is essential to modern life — it powers our homes, offices, and industries. However, in countries like Pakistan, most electricity is generated from fossil fuels such as coal, oil, and natural gas.</p>
+                        
+                        <div class="chapter-full" id="chapter5-full">
+                            <p>When we use electricity inefficiently, we contribute to higher demand for power plants that burn these fuels, releasing pollutants into the air. By becoming more energy-efficient, we can reduce this demand and help clean the air we breathe.</p>
+                            
+                            <h4>1. Simple Energy-Saving Habits</h4>
+                            <p>Small changes in daily routines can add up to significant energy savings:</p>
+                            <ul>
+                                <li>Turn off lights and electronics when not in use</li>
+                                <li>Unplug chargers and appliances that aren't being used</li>
+                                <li>Use natural light during the day instead of artificial lighting</li>
+                                <li>Wash clothes in cold water when possible</li>
+                                <li>Air-dry clothes instead of using a dryer</li>
+                            </ul>
+                            
+                            <h4>2. Energy-Efficient Appliances</h4>
+                            <p>When purchasing new appliances, look for energy-efficient models:</p>
+                            <ul>
+                                <li>Choose LED bulbs over incandescent or fluorescent lighting</li>
+                                <li>Select ENERGY STAR certified appliances when available</li>
+                                <li>Consider inverter technology for air conditioners and refrigerators</li>
+                                <li>Use smart power strips to prevent phantom energy drain</li>
+                            </ul>
+                            
+                            <h4>3. Home and Office Improvements</h4>
+                            <p>Some investments can lead to long-term energy savings:</p>
+                            <ul>
+                                <li>Proper insulation to reduce heating and cooling needs</li>
+                                <li>Weather stripping around doors and windows</li>
+                                <li>Programmable thermostats to optimize temperature control</li>
+                                <li>Energy-efficient windows and doors</li>
+                            </ul>
+                            
+                            <h4>4. Reduce Dependence on Generators</h4>
+                            <p>Frequent power outages in cities like Karachi have made diesel generators common, but these machines are highly polluting. Investing in battery-based backup systems or solar inverters provides cleaner alternatives.</p>
+                            
+                            <p>By saving energy and supporting renewable sources, every citizen can help reduce the demand for polluting power plants — directly cleaning the air we all share.</p>
+                        </div>
+                        
+                        <button class="read-more-btn" data-chapter="5">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chapter 6 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Waste Management and Recycling for Cleaner Air</h3>
+                        <span class="chapter-number">Chapter 6</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "What we throw away doesn't disappear—it transforms into pollution."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Waste is more than just an eyesore. When mismanaged, it becomes a major source of air pollution. Across Pakistan, garbage piles up on roadsides or in empty plots, where it is often burned to reduce volume.</p>
+                        
+                        <div class="chapter-full" id="chapter6-full">
+                            <p>This practice releases a toxic cocktail of gases — including carbon monoxide, methane, and carcinogenic chemicals — that linger in the air and endanger human health.</p>
+                            
+                            <h4>1. The Problem with Open Burning</h4>
+                            <p>Open burning of garbage is one of the most harmful urban habits. It may seem convenient, but it contributes heavily to smog and respiratory diseases. The burning of plastics, in particular, releases dangerous dioxins that can cause long-term damage to lungs and other organs.</p>
+                            <p>Instead of burning, proper segregation and disposal of waste should be practiced. Households should separate recyclable materials (plastic, paper, glass, and metal) from organic waste (food and garden matter).</p>
+                            
+                            <h4>2. Reduce, Reuse, Recycle – The 3R Principle</h4>
+                            <p>The foundation of sustainable waste management lies in the 3Rs:</p>
+                            <ul>
+                                <li><strong>Reduce:</strong> Avoid unnecessary packaging, single-use plastics, and disposable items.</li>
+                                <li><strong>Reuse:</strong> Find creative ways to repurpose containers, jars, and clothing.</li>
+                                <li><strong>Recycle:</strong> Support recycling programs and encourage others to do the same.</li>
+                            </ul>
+                            <p>In Karachi, several startups and NGOs are working on collecting recyclable waste from households. Supporting these initiatives can make a real difference.</p>
+                            
+                            <h4>3. Composting Organic Waste</h4>
+                            <p>Organic waste, when dumped in landfills, releases methane — a potent greenhouse gas. Composting this waste at home not only eliminates emissions but also produces nutrient-rich soil for plants. It's a simple practice that households can easily adopt using kitchen scraps and garden waste.</p>
+                            
+                            <h4>4. Community Clean-Up Initiatives</h4>
+                            <p>Neighborhoods can organize clean-up drives and educate others about the dangers of littering and open burning. Schools can also involve students in recycling projects to build lifelong habits.</p>
+                            
+                            <h4>5. Government and Citizen Collaboration</h4>
+                            <p>While municipal systems are responsible for large-scale waste management, citizens play a crucial role in ensuring those systems work. Reporting illegal dumping, participating in awareness campaigns, and maintaining personal cleanliness are all essential steps.</p>
+                            
+                            <p>Clean streets lead to clean air — and clean air leads to healthier, happier communities.</p>
+                        </div>
+                        
+                        <button class="read-more-btn" data-chapter="6">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chapter 7 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Sustainable Diets and Responsible Consumption</h3>
+                        <span class="chapter-number">Chapter 7</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Every meal is a vote for the planet."
+                    </div>
+                    <div class="chapter-content">
+                        <p>What we eat and how our food is produced have a surprisingly large impact on air quality. Food production, packaging, and transportation contribute to air pollution through fuel emissions, fertilizer use, and industrial waste.</p>
+                        
+                        <div class="chapter-full" id="chapter7-full">
+                            <p>Even the burning of agricultural residue — like wheat stubble — is a major seasonal cause of smog in Pakistan and India.</p>
+                            <p>By choosing more sustainable diets and reducing food waste, citizens can help reduce pollution without sacrificing taste or nutrition.</p>
+                            
+                            <h4>1. Eat Local and Seasonal Foods</h4>
+                            <p>Buying local produce means your food travels shorter distances, reducing the fuel and emissions involved in transportation. Seasonal foods also require fewer artificial inputs, such as chemical fertilizers or refrigeration.</p>
+                            <p>Farmers' markets, community-supported agriculture, and local vendors can connect consumers with nearby producers. Supporting them keeps money in the local economy and reduces environmental costs.</p>
+                            
+                            <h4>2. Cut Down on Processed and Packaged Foods</h4>
+                            <p>The production and disposal of plastic packaging contribute to air pollution both directly and indirectly. Factories that make plastic release harmful pollutants, and discarded wrappers often end up burned or in landfills.</p>
+                            <p>Choosing fresh ingredients and avoiding over-packaged items can make a meaningful difference. Carrying reusable bags and containers when shopping is another simple but powerful act of environmental responsibility.</p>
+                            
+                            <h4>3. Reduce Meat Consumption</h4>
+                            <p>Livestock farming releases large quantities of methane and ammonia — both harmful to the atmosphere. While not everyone can or wants to give up meat entirely, reducing consumption a few days a week can significantly lower pollution and resource use.</p>
+                            <p>Opting for plant-based meals more often also supports personal health, making it a win-win for people and the planet.</p>
+                            
+                            <h4>4. Avoid Food Waste</h4>
+                            <p>Every time food is wasted, the energy and resources used to produce it are wasted too. In Pakistan, food wastage during weddings, buffets, and events is particularly high.</p>
+                            <p>Simple habits — like planning meals, storing leftovers properly, and donating excess food — can go a long way. NGOs like the Robin Hood Army and Rizq collect surplus food to distribute among underprivileged communities, turning potential waste into nourishment.</p>
+                            
+                            <h4>5. Support Sustainable Agriculture</h4>
+                            <p>Consumers can encourage farmers who use eco-friendly practices, such as organic farming, minimal pesticide use, and crop rotation. These methods keep soil and air cleaner. By choosing responsibly grown products, citizens indirectly support cleaner agricultural systems.</p>
+                        </div>
+                        
+                        <button class="read-more-btn" data-chapter="7">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chapter 8 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Green Spaces and Urban Forestry</h3>
+                        <span class="chapter-number">Chapter 8</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "When we plant trees, we plant hope." – Wangari Maathai
+                    </div>
+                    <div class="chapter-content">
+                        <p>Trees are nature's air purifiers. They absorb carbon dioxide, release oxygen, and trap particulate matter that would otherwise remain in the air. In densely populated cities like Karachi, where pollution and heat levels are high, urban greenery plays a crucial role in creating livable spaces.</p>
+                        
+                        <div class="chapter-full" id="chapter8-full">
+                            <h4>1. The Role of Trees in Air Purification</h4>
+                            <p>A single mature tree can absorb up to 22 kilograms of carbon dioxide each year and filter out harmful pollutants like nitrogen dioxide and sulfur dioxide. Green belts and parks act as natural barriers, reducing smog and cooling the surroundings.</p>
+                            <p>Areas with dense tree cover have noticeably cleaner air, lower temperatures, and calmer noise levels — all contributing to better mental and physical health.</p>
+                            
+                            <h4>2. Community Tree-Planting Initiatives</h4>
+                            <p>Citizens can come together to plant trees in schools, parks, and roadside areas. Campaigns like Clean Green Pakistan and Ten Billion Tree Tsunami have shown that large-scale efforts can transform environments.</p>
+                            <p>However, maintenance is just as important as planting. Communities should ensure that newly planted trees are watered and protected from damage.</p>
+                            
+                            <h4>3. Green Roofs and Vertical Gardens</h4>
+                            <p>In modern urban architecture, space is limited. But rooftops and walls can be used to grow vegetation. Green roofs and vertical gardens reduce heat, absorb dust, and improve air quality while adding aesthetic value.</p>
+                            <p>Even small balconies can host potted plants that contribute to cleaner air. Herbs like mint, basil, and rosemary are easy to grow and useful in cooking.</p>
+                            
+                            <h4>4. Protecting Existing Green Spaces</h4>
+                            <p>It's not enough to plant new trees — we must also protect existing parks and forests. Karachi's shrinking green cover, due to construction and land grabbing, has worsened air quality and increased urban heat.</p>
+                            <p>Citizens can advocate for the protection of public parks, join environmental groups, and report illegal tree-cutting.</p>
+                            
+                            <h4>5. Indoor Plants for Cleaner Air</h4>
+                            <p>Indoor air can be even more polluted than outdoor air due to dust, mold, and chemicals from cleaning products. Houseplants like snake plants, peace lilies, and spider plants are known to filter indoor air naturally.</p>
+                            <p>By greening both indoor and outdoor spaces, citizens can create healthier environments for themselves and future generations.</p>
+                        </div>
+                        
+                        <button class="read-more-btn" data-chapter="8">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chapter 9 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Advocacy and Community Action</h3>
+                        <span class="chapter-number">Chapter 9</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "Change happens when voices unite."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Individual actions are essential, but lasting change often requires collective effort. When citizens come together to demand cleaner air, governments and industries listen.</p>
+                        
+                        <div class="chapter-full" id="chapter9-full">
+                            <h4>1. Raising Awareness</h4>
+                            <p>Many people are unaware of how serious air pollution is or how it affects them. Sharing information through social media, community meetings, and school programs can build a culture of awareness.</p>
+                            <p>Simple tools — like air quality apps or home monitoring devices — can help people track pollution levels and understand the problem firsthand.</p>
+                            
+                            <h4>2. Engaging with Local Government</h4>
+                            <p>Citizens can petition municipal authorities to enforce emission standards, improve waste management, and expand green spaces. Writing letters, attending public hearings, and meeting with elected representatives are effective ways to push for policy change.</p>
+                            <p>In Karachi, residents have successfully campaigned against illegal industrial emissions in residential areas by documenting violations and presenting evidence to officials.</p>
+                            
+                            <h4>3. Supporting Environmental Organizations</h4>
+                            <p>Groups like WWF-Pakistan, The Nature Conservancy, and local NGOs work tirelessly to protect the environment. Volunteering time or donating resources can amplify their impact.</p>
+                            <p>Youth-led movements, such as Fridays for Future, have also shown the power of young voices in demanding climate action.</p>
+                            
+                            <h4>4. Corporate Responsibility</h4>
+                            <p>Businesses have a major role to play in reducing pollution. Citizens can support companies that adopt sustainable practices and avoid those that pollute excessively. Public pressure has led many corporations to reduce emissions, use renewable energy, and adopt eco-friendly packaging.</p>
+                            
+                            <h4>5. Building Green Communities</h4>
+                            <p>Neighborhoods can form "green committees" to organize tree planting, waste segregation, and carpooling networks. Schools can include environmental education in their curriculum, teaching children to value and protect nature from an early age.</p>
+                            <p>When communities unite around a common goal, they become a powerful force for change — ensuring that the air we breathe today remains clean for generations to come.</p>
+                        </div>
+                        
+                        <button class="read-more-btn" data-chapter="9">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chapter 10 -->
+                <div class="chapter">
+                    <div class="chapter-header">
+                        <h3 class="chapter-title">Conclusion – A Call to Action</h3>
+                        <span class="chapter-number">Chapter 10</span>
+                    </div>
+                    <div class="chapter-quote">
+                        "The future of our air is in our hands."
+                    </div>
+                    <div class="chapter-content">
+                        <p>Air pollution is not an unsolvable problem. It is a challenge that requires awareness, commitment, and action from every citizen. The solutions are within reach — from sustainable transport and energy efficiency to waste reduction and community advocacy.</p>
+                        
+                        <div class="chapter-full" id="chapter10-full">
+                            <p>This book has outlined practical steps that individuals and communities can take to reduce air pollution. But knowledge alone is not enough — it must be translated into action.</p>
+                            
+                            <h4>Start Small, Think Big</h4>
+                            <p>You don't need to change everything at once. Begin with one habit — whether it's turning off lights when leaving a room, using public transport once a week, or planting a single tree. Small actions, when multiplied by millions of people, create massive change.</p>
+                            
+                            <h4>Inspire Others</h4>
+                            <p>Share what you learn with family, friends, and colleagues. Encourage your workplace or school to adopt eco-friendly practices. Celebrate successes, no matter how small, and learn from setbacks.</p>
+                            
+                            <h4>Stay Informed and Engaged</h4>
+                            <p>Follow local air quality reports, support environmental policies, and hold leaders accountable. The fight for clean air is ongoing, and every voice matters.</p>
+                            
+                            <h4>A Shared Responsibility</h4>
+                            <p>Clean air is a common good — it belongs to everyone. Protecting it is our shared responsibility. By working together, we can ensure that future generations inherit a world where breathing is safe and the sky is clear.</p>
+                            
+                            <p>Let's begin today. For ourselves, for our children, and for the planet we call home.</p>
+                        </div>
+                        
+                        <button class="read-more-btn" data-chapter="10">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="download-section">
+                <h3>Download the Complete Book</h3>
+                <p>Get the full PDF version to read offline or share with others.</p>
+                <a href="The-Book.pdf" class="cta-button" download>
+                    <i class="fas fa-download"></i> Download Full PDF
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
@@ -608,185 +928,72 @@
                         <div class="logo-icon">EC</div>
                         EcoCharge
                     </div>
-                    <p class="footer-description">Leading Pakistan's transition to sustainable transportation with EV charging infrastructure, clean air solutions, and comprehensive research.</p>
-                    <a href="#contact" class="cta-button">Contact Us</a>
+                    <p class="footer-description">
+                        Leading the transition to sustainable transportation with innovative EV charging solutions and clean air advocacy.
+                    </p>
                 </div>
-                
                 <div class="footer-links">
                     <div class="footer-column">
                         <h3>Quick Links</h3>
                         <ul>
+                            <li><a href="index.html">Home</a></li>
                             <li><a href="index.html#chargers">EV Chargers</a></li>
-                            <li><a href="index.html#map">Charging Map</a></li>
-                            <li><a href="cleanair.html">Clean Air Solutions</a></li>
-                            <li><a href="research.html">Research</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="index.html#podcasts">Podcasts</a></li>
+                            <li><a href="map.html">Charging Map</a></li>
+                            <li><a href="cleanair.html">Clean Air</a></li>
                         </ul>
                     </div>
-                    
                     <div class="footer-column">
                         <h3>Resources</h3>
                         <ul>
-                            <li><a href="#">EV Guide</a></li>
-                            <li><a href="#">Carbon Calculator</a></li>
-                            <li><a href="#">Research Papers</a></li>
-                            <li><a href="#">Case Studies</a></li>
-                            <li><a href="#">FAQ</a></li>
+                            <li><a href="research.html">Research</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="thebook.html">The Book</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
                         </ul>
                     </div>
-                    
                     <div class="footer-column">
-                        <h3>Contact</h3>
+                        <h3>Connect</h3>
                         <ul>
-                            <li><a href="mailto:info@ecocharge.pk">info@ecocharge.pk</a></li>
-                            <li><a href="tel:+92123456789">+92 123 456789</a></li>
-                            <li>Karachi, Pakistan</li>
+                            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                            <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            
             <div class="footer-bottom">
-                <p>&copy; 2023 EcoCharge. All rights reserved.</p>
+                <p>&copy; 2024 EcoCharge. All rights reserved. | Breathing Clean: A Citizen's Guide to Sustainable Living</p>
             </div>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const researchGrid = document.getElementById('research-grid-container');
-            const researchCount = document.getElementById('research-count');
-            const searchInput = document.getElementById('search-input');
-            const modal = document.getElementById('research-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalMeta = document.getElementById('modal-meta');
-            const modalCategories = document.getElementById('modal-categories');
-            const modalContent = document.getElementById('modal-content');
-            const closeModalBtn = document.getElementById('modal-close');
-            
-            let researchPapers = []; // Will hold our fetched data
-
-            // --- New Function to Fetch Data ---
-            async function loadResearchPapers() {
-                try {
-                    const response = await fetch('research-papers.json');
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    researchPapers = await response.json();
-                    displayResearchPapers(researchPapers);
-                } catch (error) {
-                    console.error("Could not load research papers:", error);
-                    researchGrid.innerHTML = '<p>Sorry, we were unable to load research papers at this time.</p>';
-                }
-            }
-
-            // 1. Populate research grid
-            function displayResearchPapers(papers) {
-                researchGrid.innerHTML = '';
-                researchCount.textContent = papers.length;
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Read More Toggle for Chapters
+        const readMoreButtons = document.querySelectorAll('.read-more-btn');
+        
+        readMoreButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const chapterNumber = button.getAttribute('data-chapter');
+                const chapterFull = document.getElementById(`chapter${chapterNumber}-full`);
                 
-                papers.forEach(paper => {
-                    const card = `
-                        <div class="research-card" data-id="${paper.id}">
-                            <div class="research-card-content">
-                                <p class="research-card-meta">
-                                    <span>${paper.author}</span>
-                                    <span>${paper.date}</span>
-                                </p>
-                                <h3 class="research-card-title">${paper.title}</h3>
-                                <p class="research-card-excerpt">${paper.excerpt}</p>
-                                <div class="research-categories">
-                                    ${paper.categories.map(cat => `<span class="category-tag">${cat}</span>`).join('')}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    researchGrid.innerHTML += card;
-                });
-            }
-
-            // 2. Search functionality
-            searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                if (!searchTerm) {
-                    displayResearchPapers(researchPapers);
-                    return;
-                }
-                
-                const filteredPapers = researchPapers.filter(paper => {
-                    return paper.title.toLowerCase().includes(searchTerm) ||
-                        paper.author.toLowerCase().includes(searchTerm) ||
-                        paper.categories.some(cat => cat.toLowerCase().includes(searchTerm)) ||
-                        paper.excerpt.toLowerCase().includes(searchTerm);
-                });
-                displayResearchPapers(filteredPapers);
-            });
-
-            // 3. Modal functionality
-            function openModal(paper) {
-                modalTitle.textContent = paper.title;
-                modalMeta.textContent = `${paper.author} • ${paper.date}`;
-                
-                modalCategories.innerHTML = '';
-                paper.categories.forEach(cat => {
-                    const categoryTag = document.createElement('span');
-                    categoryTag.className = 'category-tag';
-                    categoryTag.textContent = cat;
-                    modalCategories.appendChild(categoryTag);
-                });
-                
-                modalContent.innerHTML = paper.fullContent;
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeModal() {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            // 4. Event Listeners
-            researchGrid.addEventListener('click', (e) => {
-                const card = e.target.closest('.research-card');
-                if (card) {
-                    const paperId = parseInt(card.dataset.id, 10);
-                    const paper = researchPapers.find(p => p.id === paperId);
-                    if (paper) {
-                        openModal(paper);
-                    }
+                if (chapterFull.classList.contains('active')) {
+                    chapterFull.classList.remove('active');
+                    button.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
+                } else {
+                    chapterFull.classList.add('active');
+                    button.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
                 }
             });
-
-            closeModalBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-            
-            // Mobile menu toggle for research page
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.getElementById('navLinks');
-
-            if (hamburger && navLinks) {
-                hamburger.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                });
-
-                // Close menu when clicking on a link
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        navLinks.classList.remove('active');
-                    });
-                });
-            }
-            
-            // Initial load
-            loadResearchPapers(); // Call the new fetch function
         });
     </script>
-
 </body>
 </html>
