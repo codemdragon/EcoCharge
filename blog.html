@@ -37,15 +37,6 @@
             line-height: 1.6;
         }
 
-        /* START: FIX FOR MOBILE ZOOM ISSUE */
-        body.modal-open {
-            overflow: hidden;
-            position: fixed; /* Prevents viewport zoom/scaling issues on mobile */
-            width: 100%;
-            height: 100%;
-        }
-        /* END: FIX FOR MOBILE ZOOM ISSUE */
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -226,25 +217,6 @@
             flex-grow: 1;
             margin-bottom: 20px;
         }
-
-        .read-more-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s;
-            text-decoration: none;
-            text-align: center;
-            margin-top: auto;
-            display: block;
-        }
-
-        .read-more-btn:hover {
-            background: var(--primary-dark);
-        }
         
         /* Modal Styles */
         .modal-overlay {
@@ -263,22 +235,23 @@
             visibility: hidden;
             transition: opacity 0.3s, visibility 0.3s;
         }
-
+        
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-
+        
         .modal-container {
             background: var(--white);
             border-radius: var(--radius);
             width: 90%;
             max-width: 800px;
             max-height: 80vh;
-            transform: scale(0.9);
-            transition: transform 0.3s;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            transform: scale(0.95);
+            transition: transform 0.3s;
         }
 
         .modal-overlay.active .modal-container {
@@ -286,33 +259,26 @@
         }
 
         .modal-header {
-            padding: 25px;
+            padding: 20px 30px;
             border-bottom: 1px solid var(--gray-light);
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
         }
 
         .modal-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .modal-meta {
-            font-size: 14px;
-            color: var(--gray);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--dark);
         }
 
         .modal-close-btn {
             background: none;
             border: none;
-            font-size: 30px;
-            color: var(--gray);
+            font-size: 24px;
             cursor: pointer;
-            line-height: 1;
-            padding: 0;
-            margin-left: 20px;
+            color: var(--gray);
+            transition: color 0.3s;
         }
 
         .modal-close-btn:hover {
@@ -324,22 +290,17 @@
             overflow-y: auto;
             line-height: 1.7;
         }
-
+        
         .modal-content p {
             margin-bottom: 1.5em;
         }
-
+        
         .modal-content h3 {
             margin-top: 1.5em;
             margin-bottom: 0.5em;
             font-weight: 600;
         }
-
-        .modal-content ul, .modal-content ol {
-            margin: 1em 0;
-            padding-left: 2em;
-        }
-
+        
         /* Footer */
         footer {
             background: var(--dark);
@@ -369,17 +330,6 @@
         .footer-description {
             color: var(--gray-light);
             margin-bottom: 20px;
-        }
-
-        .footer-social a {
-            color: var(--gray-light);
-            font-size: 20px;
-            margin-right: 15px;
-            transition: color 0.3s;
-        }
-
-        .footer-social a:hover {
-            color: var(--primary);
         }
 
         .footer-links {
@@ -425,27 +375,16 @@
             text-align: center;
             padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--gray);
+            color: var(--gray-light);
             font-size: 14px;
         }
 
-        /* Responsive Styles */
-        @media (max-width: 1024px) {
-            .footer-content {
-                flex-direction: column;
-                gap: 40px;
-            }
-
-            .footer-links {
-                justify-content: space-between;
-            }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
             }
-
+            
             .nav-links {
                 position: fixed;
                 top: 80px;
@@ -462,23 +401,19 @@
                 box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
                 display: flex;
             }
-
+            
             .nav-links.active {
                 left: 0;
             }
-
-            nav .cta-button {
+            
+            .cta-button {
                 display: none;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 30px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container">
             <nav>
@@ -503,16 +438,23 @@
         </div>
     </header>
 
+    <!-- Main Blog Section -->
     <main>
-        <section id="blog">
+        <section id="blog-page">
             <div class="container">
-                <h2 class="section-title">Latest Insights & News</h2>
+                <h2 class="section-title">The EcoCharge Blog</h2>
+                <p style="text-align: center; color: var(--gray); max-width: 800px; margin: -40px auto 50px;">
+                    Insights, news, and research on Pakistan's journey towards a sustainable, electric future.
+                </p>
+
                 <div class="blog-grid" id="blog-grid-container">
-                    </div>
+                    <!-- Blog cards will be dynamically inserted here -->
+                </div>
             </div>
         </section>
     </main>
-
+    
+    <!-- Blog Post Modal -->
     <div class="modal-overlay" id="blog-modal">
         <div class="modal-container">
             <div class="modal-header">
@@ -525,6 +467,7 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <footer id="contact">
         <div class="container">
             <div class="footer-content">
@@ -533,13 +476,8 @@
                         <div class="logo-icon">EC</div>
                         EcoCharge
                     </div>
-                    <p class="footer-description">Leading Pakistan's transition to sustainable and electric mobility.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
+                    <p class="footer-description">Leading Pakistan's transition to sustainable transportation with EV charging infrastructure, clean air solutions, and comprehensive research.</p>
+                    <a href="#contact" class="cta-button">Contact Us</a>
                 </div>
                 
                 <div class="footer-links">
@@ -548,20 +486,21 @@
                         <ul>
                             <li><a href="index.html#chargers">EV Chargers</a></li>
                             <li><a href="map.html">Charging Map</a></li>
-                            <li><a href="cleanair.html">Clean Air</a></li>
+                            <li><a href="cleanair.html">Clean Air Solutions</a></li>
                             <li><a href="research.html">Research</a></li>
                             <li><a href="blog.html">Blog</a></li>
+                            <li><a href="index.html#podcasts">Podcasts</a></li>
                         </ul>
                     </div>
                     
                     <div class="footer-column">
                         <h3>Resources</h3>
                         <ul>
-                            <li><a href="#">Support</a></li>
-                            <li><a href="#">Press</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Terms of Service</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">EV Guide</a></li>
+                            <li><a href="#">Carbon Calculator</a></li>
+                            <li><a href="#">Research Papers</a></li>
+                            <li><a href="#">Case Studies</a></li>
+                            <li><a href="#">FAQ</a></li>
                         </ul>
                     </div>
                     
@@ -585,29 +524,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const blogGrid = document.getElementById('blog-grid-container');
-            let blogPosts = [];
-
-            // 3. Modal open/close
             const modal = document.getElementById('blog-modal');
             const modalTitle = document.getElementById('modal-title');
-            const modalMeta = document.getElementById('modal-meta');
             const modalContent = document.getElementById('modal-content');
             const closeModalBtn = document.getElementById('modal-close');
+            
+            let blogPosts = []; // Will hold our fetched data
 
-            function openModal(post) {
-                modalTitle.textContent = post.title;
-                modalMeta.textContent = `${post.author} • ${post.date}`;
-                modalContent.innerHTML = post.fullContent;
-                modal.classList.add('active');
-                document.body.classList.add('modal-open'); // FIX: Add class to body
-            }
-
-            function closeModal() {
-                modal.classList.remove('active');
-                document.body.classList.remove('modal-open'); // FIX: Remove class from body
-            }
-
-            // Function to fetch blog posts
+            // --- New Function to Fetch Data ---
             async function loadBlogPosts() {
                 try {
                     const response = await fetch('blog-posts.json');
@@ -630,18 +554,31 @@
                         <div class="blog-card">
                             <img src="${post.image}" alt="${post.title}" class="blog-card-image">
                             <div class="blog-card-content">
+                                <p class="blog-card-meta">By ${post.author} on ${post.date}</p>
                                 <h3 class="blog-card-title">${post.title}</h3>
-                                <p class="blog-card-meta">${post.author} • ${post.date}</p>
                                 <p class="blog-card-excerpt">${post.excerpt}</p>
-                                <a href="#" class="read-more-btn" data-id="${post.id}">Read More</a>
+                                <a href="#" class="cta-button read-more-btn" data-id="${post.id}">Read More</a>
                             </div>
                         </div>
                     `;
                     blogGrid.innerHTML += card;
                 });
             }
-            
-            // 4. Event Listeners
+
+            // 2. Modal functionality
+            function openModal(post) {
+                modalTitle.textContent = post.title;
+                modalContent.innerHTML = post.fullContent;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // 3. Event Listeners
             blogGrid.addEventListener('click', (e) => {
                 if (e.target.classList.contains('read-more-btn')) {
                     e.preventDefault();
